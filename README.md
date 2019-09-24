@@ -1,5 +1,5 @@
 # AuctionPortal
-
+PV 179 project
 - auction different sorts of things
 - administrator account - can manage auction categories, update auctions or delete inappropriate auctions
 - customer account - can create a new auction, update existing ones which belongs to him and bid to another auctions  
