@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
 
 namespace AuctionPortal.DataAccessLayer.EntityFramework
 {
     public class AuctionPortalDbContext : DbContext
     {
-        private const string ConnectionString = "Data source=(localdb)\\mssqllocaldb;Database=AuctionPortalDbContext;Trusted_Connection=True;MultipleActiveResultSets=true";
+	    private const string ConnectionString = "Data source=(localdb)\\mssqllocaldb;Database=AuctionPortalDbContext;Trusted_Connection=True;MultipleActiveResultSets=true";
 
         /// <summary>
         /// Non-parametric ctor used by data access layer
@@ -29,7 +25,14 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework
             Database.CreateIfNotExists();
         }
 
+        public DbSet<Account> Accounts { get; set; }
 
-        //TODO: sets
-    }
+		public DbSet<Auction> Auctions { get; set; }
+
+		public DbSet<AccountAuction> AccountAuctions { get; set; }
+
+		public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+	}
 }
