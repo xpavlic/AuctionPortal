@@ -51,8 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityFrameworkQuery.cs" />
     <Compile Include="EntityFrameworkRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimplePredicateExtension.cs" />
     <Compile Include="UnitOfWork\EntityFrameworkUnitOfWork.cs" />
     <Compile Include="UnitOfWork\EntityFrameworkUnitOfWorkProvider.cs" />
   </ItemGroup>
