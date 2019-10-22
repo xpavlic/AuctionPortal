@@ -6,13 +6,6 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework
 {
     public class AuctionPortalDbContext : DbContext
     {
-        //private const string ConnectionString = "Data source=(localdb)\\mssqllocaldb;Database=AuctionPortalDbContext;Trusted_Connection=True;MultipleActiveResultSets=true";
-
-        //private const string ConnectionString = "connectionString = \"Data Source=(LocalDB)\\MSSQLLocalDB;" +
-        //    "AttachDbfilename=J:\\pv179\\Database.mdf;" +
-        //    "Integrated Security = True\"" +
-        //    "providerName=\"System.Data.SqlClient\"";
-
         private const string ConnectionString = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=J:\\pv179\\Database.mdf;Integrated Security = True;";
 
         /// <summary>
@@ -34,11 +27,11 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework
 
         public DbSet<Account> Accounts { get; set; }
 
-		public DbSet<Auction> Auctions { get; set; }
+	    public DbSet<Auction> Auctions { get; set; }
 
-		public DbSet<AccountAuction> AccountAuctions { get; set; }
+	    public DbSet<AccountAuctionRelation> AccountAuctionRelations { get; set; }
 
-		public DbSet<Category> Categories { get; set; }
+	    public DbSet<Category> Categories { get; set; }
 
         public DbSet<Product> Products { get; set; }
 	}

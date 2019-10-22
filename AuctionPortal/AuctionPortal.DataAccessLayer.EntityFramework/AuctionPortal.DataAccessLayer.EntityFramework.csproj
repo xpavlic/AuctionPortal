@@ -54,7 +54,7 @@
     <Compile Include="AuctionPortalDbContext.cs" />
     <Compile Include="DatabaseInitializer.cs" />
     <Compile Include="Entities\Account.cs" />
-    <Compile Include="Entities\AccountAuction.cs" />
+    <Compile Include="Entities\AccountAuctionRelation.cs" />
     <Compile Include="Entities\Auction.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\IEntity.cs" />

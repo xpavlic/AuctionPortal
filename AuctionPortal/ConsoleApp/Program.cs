@@ -14,7 +14,7 @@ namespace ConsoleApp
 				List<Product> products = new List<Product>(context.Products);
 				foreach (var VARIABLE in products)
 				{
-					Console.WriteLine(VARIABLE.Name);
+		            Console.WriteLine(VARIABLE.Name);
 				}
 			}
 

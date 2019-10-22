@@ -12,6 +12,8 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Entities
 		[NotMapped]
 		public string TableName { get; } = nameof(AuctionPortalDbContext.Accounts);
 
+        public bool IsAdministrator { get; set; }
+
 		[MaxLength(64)]
 		public string FirstName { get; set; }
 
