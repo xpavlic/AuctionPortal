@@ -6,7 +6,14 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework
 {
     public class AuctionPortalDbContext : DbContext
     {
-	    private const string ConnectionString = "Data source=(localdb)\\mssqllocaldb;Database=AuctionPortalDbContext;Trusted_Connection=True;MultipleActiveResultSets=true";
+        //private const string ConnectionString = "Data source=(localdb)\\mssqllocaldb;Database=AuctionPortalDbContext;Trusted_Connection=True;MultipleActiveResultSets=true";
+
+        //private const string ConnectionString = "connectionString = \"Data Source=(LocalDB)\\MSSQLLocalDB;" +
+        //    "AttachDbfilename=J:\\pv179\\Database.mdf;" +
+        //    "Integrated Security = True\"" +
+        //    "providerName=\"System.Data.SqlClient\"";
+
+        private const string ConnectionString = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=J:\\pv179\\Database.mdf;Integrated Security = True;";
 
         /// <summary>
         /// Non-parametric ctor used by data access layer
