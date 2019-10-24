@@ -18,6 +18,10 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Entities
 		[Range(0, int.MaxValue)]
 		public decimal ActualPrice { get; set; }
 
+        public bool IsOpened { get; set; }
+
+        public DateTime ClosingTime { get; set; }
+
 		[MaxLength(65536)]
 		public string Description { get; set; }
 

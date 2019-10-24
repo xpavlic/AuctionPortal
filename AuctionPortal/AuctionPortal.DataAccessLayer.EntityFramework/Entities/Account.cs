@@ -14,6 +14,9 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Entities
 
         public bool IsAdministrator { get; set; }
 
+        [MaxLength(32)]
+        public string Password { get; set; }
+
 		[MaxLength(64)]
 		public string FirstName { get; set; }
 

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,18 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\MappingConfig.cs" />
     <Compile Include="DataTransferObjects\AccountAuctionRelationDTO.cs" />
     <Compile Include="DataTransferObjects\AccountDTO.cs" />
     <Compile Include="DataTransferObjects\AuctionDTO.cs" />
     <Compile Include="DataTransferObjects\CategoryDTO.cs" />
+    <Compile Include="DataTransferObjects\Common\DtoBase.cs" />
+    <Compile Include="DataTransferObjects\Common\FilterDtoBase.cs" />
+    <Compile Include="DataTransferObjects\Common\QueryResultDto.cs" />
+    <Compile Include="DataTransferObjects\Filters\AccountAuctionRelationFilterDto.cs" />
+    <Compile Include="DataTransferObjects\Filters\AccountFilterDto.cs" />
+    <Compile Include="DataTransferObjects\Filters\AuctionFilterDto.cs" />
+    <Compile Include="DataTransferObjects\Filters\CategoryFilterDto.cs" />
+    <Compile Include="DataTransferObjects\Filters\ProductFilterDto.cs" />
     <Compile Include="DataTransferObjects\ProductDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Config\" />
-    <Folder Include="DataTransferObjects\Common\" />
     <Folder Include="DataTransferObjects\Enums\" />
-    <Folder Include="DataTransferObjects\Files\" />
+    <Folder Include="DataTransferObjects\QueryObjects\Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
