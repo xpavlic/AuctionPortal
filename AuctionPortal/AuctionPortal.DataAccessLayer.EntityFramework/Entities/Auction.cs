@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AuctionPortal.Infrastructure;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

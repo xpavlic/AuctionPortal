@@ -57,13 +57,18 @@
     <Compile Include="Entities\AccountAuctionRelation.cs" />
     <Compile Include="Entities\Auction.cs" />
     <Compile Include="Entities\Category.cs" />
-    <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AuctionPortal.Infrastructure\AuctionPortal.Infrastructure.csproj">
+      <Project>{CAE37E38-92B9-4738-BBB5-6DDD3C7CD6DD}</Project>
+      <Name>AuctionPortal.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
