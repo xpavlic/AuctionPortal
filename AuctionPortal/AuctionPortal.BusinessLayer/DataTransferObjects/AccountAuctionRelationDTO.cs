@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AuctionPortal.BusinessLayer.DataTransferObjects
 {
-    class AccountAuctionRelationDTO : DtoBase
+    public class AccountAuctionRelationDTO : DtoBase
     {
         public Guid AccountId { get; set; }
 

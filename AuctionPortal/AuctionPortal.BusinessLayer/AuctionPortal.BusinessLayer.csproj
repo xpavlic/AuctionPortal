@@ -58,15 +58,17 @@
     <Compile Include="DataTransferObjects\Filters\CategoryFilterDto.cs" />
     <Compile Include="DataTransferObjects\Filters\ProductFilterDto.cs" />
     <Compile Include="DataTransferObjects\ProductDTO.cs" />
+    <Compile Include="QueryObjects\AccountAuctionRelationQueryBase.cs" />
+    <Compile Include="QueryObjects\AccountQueryObject.cs" />
+    <Compile Include="QueryObjects\AuctionQueryObject.cs" />
+    <Compile Include="QueryObjects\CategoryQueryObject.cs" />
+    <Compile Include="QueryObjects\ProductQueryObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObjects\Common\QueryObjectBase.cs" />
     <Compile Include="Services\Common\CrudQueryServiceBase.cs" />
     <Compile Include="Services\Common\ServiceBase.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataTransferObjects\Enums\" />
-    <Folder Include="DataTransferObjects\QueryObjects\Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
