@@ -1,7 +1,12 @@
-﻿using System;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
+using AuctionPortal.Infrastructure;
+using AuctionPortal.Infrastructure.EntityFramework;
+using AuctionPortal.Infrastructure.EntityFramework.UnitOfWork;
+using AuctionPortal.Infrastructure.Query;
+using AuctionPortal.Infrastructure.UnitOfWork;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -14,7 +19,20 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.Config
 
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
-			throw new NotImplementedException();
+			container.Register(
+                Component.For<Func<DbContext>>()
+                    .Instance(InitializeDatabase)
+                    .LifestyleTransient(),
+                Component.For<IUnitOfWorkProvider>()
+                    .ImplementedBy<EntityFrameworkUnitOfWorkProvider>()
+                    .LifestyleSingleton(),
+                Component.For(typeof(IRepository<>))
+                    .ImplementedBy(typeof(EntityFrameworkRepository<>))
+                    .LifestyleTransient(),
+                Component.For(typeof(IQuery<>))
+                    .ImplementedBy(typeof(EntityFrameworkQuery<>))
+                    .LifestyleTransient()
+            );
 		}
 
 		private static DbContext InitializeDatabase()
