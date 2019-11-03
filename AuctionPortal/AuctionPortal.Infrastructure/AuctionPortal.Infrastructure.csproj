@@ -44,6 +44,8 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\Helpers\PredicateExtensions.cs" />
+    <Compile Include="Query\Helpers\SqlConstants.cs" />
     <Compile Include="Query\IQuery.cs" />
     <Compile Include="Query\Predicates\CompositePredicate.cs" />
     <Compile Include="Query\Predicates\IPredicate.cs" />

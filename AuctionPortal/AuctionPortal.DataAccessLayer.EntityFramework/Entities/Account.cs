@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AuctionPortal.Infrastructure;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +12,11 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Entities
 
 		[NotMapped]
 		public string TableName { get; } = nameof(AuctionPortalDbContext.Accounts);
+
+        public bool IsAdministrator { get; set; }
+
+        [MaxLength(32)]
+        public string Password { get; set; }
 
 		[MaxLength(64)]
 		public string FirstName { get; set; }
