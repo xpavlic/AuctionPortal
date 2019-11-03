@@ -65,8 +65,16 @@
     <Compile Include="QueryObjects\ProductQueryObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObjects\Common\QueryObjectBase.cs" />
+    <Compile Include="Services\Accounts\AccountService.cs" />
+    <Compile Include="Services\Accounts\IAccountService.cs" />
+    <Compile Include="Services\Auctions\AuctionService.cs" />
+    <Compile Include="Services\Auctions\IAuctionService.cs" />
+    <Compile Include="Services\Categories\CategoryService.cs" />
+    <Compile Include="Services\Categories\ICategoryService.cs" />
     <Compile Include="Services\Common\CrudQueryServiceBase.cs" />
     <Compile Include="Services\Common\ServiceBase.cs" />
+    <Compile Include="Services\Products\IProductService.cs" />
+    <Compile Include="Services\Products\ProductService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -9,6 +9,8 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects.Filters
 
         public string[] CategoryNames { get; set; }
 
+        public string Name { get; set; }
+
         public Guid ProductId { get; set; }
 
         public DateTime ClosingTime { get; set; }
