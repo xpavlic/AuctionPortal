@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
 using AuctionPortal.BusinessLayer.QueryObjects.Common;
 using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
@@ -15,9 +16,13 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects.QueryObjects
 
 		protected override IQuery<Product> ApplyWhereClause(IQuery<Product> query, ProductFilterDto filter)
 		{
-			return filter.AuctionId.Equals(Guid.Empty)
+			return filter.AuctionId.Equals(Guid.Empty) || string.IsNullOrWhiteSpace(filter.Name)
 				? query
-				: query.Where(new SimplePredicate(nameof(Product.AuctionId), ValueComparingOperator.Equal, filter.AuctionId));
+				: query.Where(new CompositePredicate(new List<IPredicate>()
+				{
+					new SimplePredicate(nameof(Product.AuctionId), ValueComparingOperator.Equal, filter.AuctionId),
+					new SimplePredicate(nameof(Product.Name), ValueComparingOperator.Equal, filter.Name)
+				}));
 		}
 	}
 }

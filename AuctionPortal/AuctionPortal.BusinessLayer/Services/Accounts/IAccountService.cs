@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Common;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
-using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
 
 namespace AuctionPortal.BusinessLayer.Services.Accounts
 {
