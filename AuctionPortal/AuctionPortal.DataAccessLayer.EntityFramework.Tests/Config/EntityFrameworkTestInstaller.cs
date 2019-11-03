@@ -20,19 +20,19 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.Config
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
 			container.Register(
-                Component.For<Func<DbContext>>()
-                    .Instance(InitializeDatabase)
-                    .LifestyleTransient(),
-                Component.For<IUnitOfWorkProvider>()
-                    .ImplementedBy<EntityFrameworkUnitOfWorkProvider>()
-                    .LifestyleSingleton(),
-                Component.For(typeof(IRepository<>))
-                    .ImplementedBy(typeof(EntityFrameworkRepository<>))
-                    .LifestyleTransient(),
-                Component.For(typeof(IQuery<>))
-                    .ImplementedBy(typeof(EntityFrameworkQuery<>))
-                    .LifestyleTransient()
-            );
+				Component.For<Func<DbContext>>()
+					.Instance(InitializeDatabase)
+					.LifestyleTransient(),
+				Component.For<IUnitOfWorkProvider>()
+					.ImplementedBy<EntityFrameworkUnitOfWorkProvider>()
+					.LifestyleSingleton(),
+				Component.For(typeof(IRepository<>))
+					.ImplementedBy(typeof(EntityFrameworkRepository<>))
+					.LifestyleTransient(),
+				Component.For(typeof(IQuery<>))
+					.ImplementedBy(typeof(EntityFrameworkQuery<>))
+					.LifestyleTransient()
+			);
 		}
 
 		private static DbContext InitializeDatabase()
