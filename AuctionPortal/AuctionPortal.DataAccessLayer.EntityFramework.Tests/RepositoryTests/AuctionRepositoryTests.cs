@@ -49,7 +49,7 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.RepositoryTests
 		{
 			var karoq = new Product
 			{
-				Id = Guid.Parse("defdf092-ec30-489d-899b-43d4fda72098"),
+				Id = Guid.Parse("38078504-14ce-435d-aee9-fbffba837fa6"),
 				Name = "Skoda Karoq",
 				ProductImgUrl = @"\Content\Images\Products\skoda_karoq.jpeg"
 			};

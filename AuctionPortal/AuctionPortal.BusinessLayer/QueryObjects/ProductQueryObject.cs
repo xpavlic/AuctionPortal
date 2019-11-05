@@ -16,11 +16,10 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects.QueryObjects
 
 		protected override IQuery<Product> ApplyWhereClause(IQuery<Product> query, ProductFilterDto filter)
 		{
-			return filter.AuctionId.Equals(Guid.Empty) || string.IsNullOrWhiteSpace(filter.Name)
+			return string.IsNullOrWhiteSpace(filter.Name)
 				? query
 				: query.Where(new CompositePredicate(new List<IPredicate>()
 				{
-					new SimplePredicate(nameof(Product.AuctionId), ValueComparingOperator.Equal, filter.AuctionId),
 					new SimplePredicate(nameof(Product.Name), ValueComparingOperator.Equal, filter.Name)
 				}));
 		}

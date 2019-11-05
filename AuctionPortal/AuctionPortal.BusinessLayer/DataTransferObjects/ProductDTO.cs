@@ -10,16 +10,13 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects
 
         public string ProductImgUrl { get; set; }
 
-        public Guid AuctionId { get; set; }
-
         public override string ToString() => Name;
 
         public override bool Equals(object obj)
         {
-            return obj is ProductDTO dTO &&
-                   Name == dTO.Name &&
-                   ProductImgUrl == dTO.ProductImgUrl &&
-                   AuctionId.Equals(dTO.AuctionId);
+			return obj is ProductDTO dTO &&
+				   Name == dTO.Name &&
+				   ProductImgUrl == dTO.ProductImgUrl;
         }
 
         public override int GetHashCode()
@@ -27,7 +24,6 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects
             var hashCode = -879323063;
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ProductImgUrl);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(AuctionId);
             return hashCode;
         }
     }

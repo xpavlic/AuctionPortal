@@ -2,6 +2,11 @@
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
+using AuctionPortal.Infrastructure;
+using AuctionPortal.Infrastructure.EntityFramework;
+using AuctionPortal.Infrastructure.EntityFramework.UnitOfWork;
+using AuctionPortal.Infrastructure.Query;
+using AuctionPortal.Infrastructure.UnitOfWork;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -14,7 +19,20 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.Config
 
 		public void Install(IWindsorContainer container, IConfigurationStore store)
 		{
-			throw new NotImplementedException();
+			container.Register(
+				Component.For<Func<DbContext>>()
+					.Instance(InitializeDatabase)
+					.LifestyleTransient(),
+				Component.For<IUnitOfWorkProvider>()
+					.ImplementedBy<EntityFrameworkUnitOfWorkProvider>()
+					.LifestyleSingleton(),
+				Component.For(typeof(IRepository<>))
+					.ImplementedBy(typeof(EntityFrameworkRepository<>))
+					.LifestyleTransient(),
+				Component.For(typeof(IQuery<>))
+					.ImplementedBy(typeof(EntityFrameworkQuery<>))
+					.LifestyleTransient()
+			);
 		}
 
 		private static DbContext InitializeDatabase()
@@ -71,9 +89,6 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.Config
 				ProductId = kodiaq.Id
 			};
 
-			kodiaq.Auction = kodiaqAuction;
-			kodiaq.AuctionId = kodiaqAuction.Id;
-
 			var a6 = new Product
 			{
 				Id = Guid.Parse("4294129a-be0d-44dc-973c-488b506b2245"),
@@ -94,9 +109,6 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.Config
 				Product = a6,
 				ProductId = a6.Id
 			};
-
-			a6.Auction = a6Auction;
-			a6.AuctionId = a6Auction.Id;
 
 			context.Auctions.AddOrUpdate(kodiaqAuction);
 			context.Auctions.AddOrUpdate(a6Auction);

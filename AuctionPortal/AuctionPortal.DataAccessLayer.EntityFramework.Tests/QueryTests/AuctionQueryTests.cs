@@ -87,8 +87,8 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.QueryTests
 				new SimplePredicate(nameof(Auction.CategoryId), ValueComparingOperator.Equal, skodaCategoryId),
 				new CompositePredicate(new List<IPredicate>
 				{
-					new SimplePredicate(nameof(Auction.ClosingTime), ValueComparingOperator.GreaterThan, new DateTime(2019, 12, 12)),
-					new SimplePredicate(nameof(Auction.ClosingTime), ValueComparingOperator.LessThan, new DateTime(2020, 3, 3))
+					new SimplePredicate(nameof(Auction.ClosingTime), ValueComparingOperator.GreaterThan, new DateTime(2019, 11, 11).ToString("yyyy-MM-dd HH:mm:ss.fff")),
+					new SimplePredicate(nameof(Auction.ClosingTime), ValueComparingOperator.LessThan, new DateTime(2020, 3, 3).ToString("yyyy-MM-dd HH:mm:ss.fff"))
 				}),
 				new CompositePredicate(new List<IPredicate>
 				{
