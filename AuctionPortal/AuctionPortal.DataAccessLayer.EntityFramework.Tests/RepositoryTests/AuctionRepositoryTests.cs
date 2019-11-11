@@ -47,12 +47,6 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.RepositoryTests
 		[Test]
 		public async Task CreateAuctionAsync_AuctionIsNotPreviouslySeeded_CreatesNewAuction()
 		{
-			var karoq = new Product
-			{
-				Id = Guid.Parse("38078504-14ce-435d-aee9-fbffba837fa6"),
-				Name = "Skoda Karoq",
-				ProductImgUrl = @"\Content\Images\Products\skoda_karoq.jpeg"
-			};
 
 			var karoqAuction = new Auction
 			{
@@ -61,9 +55,7 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.RepositoryTests
 				Name = "Skoda Karoq Auction",
 				ActualPrice = 600_000,
 				ClosingTime = new DateTime(2020, 1, 15),
-				IsOpened = true,
-				Product = karoq,
-				ProductId = karoq.Id
+				IsOpened = true
 			};
 
 			using (var uow = unitOfWorkProvider.Create())

@@ -6,5 +6,7 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects.Filters
     public class ProductFilterDto : FilterDtoBase
     {
         public string Name { get; set; }
-    }
+
+        public Guid AuctionId { get; set; }
+	}
 }

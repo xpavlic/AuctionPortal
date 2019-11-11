@@ -21,7 +21,7 @@ namespace AuctionPortal.BusinessLayer.QueryObjects
 			var definedPredicates = new List<IPredicate>();
 			AddIfDefined(FilterCategories(filter), definedPredicates);
 			AddIfDefined(FilterName(filter), definedPredicates);
-			AddIfDefined(FilterProductId(filter), definedPredicates);
+			AddIfDefined(FilterAccountId(filter), definedPredicates);
 			AddIfDefined(FilterClosingTime(filter), definedPredicates);
 			AddIfDefined(FilterActualPrice(filter), definedPredicates);
 
@@ -68,13 +68,13 @@ namespace AuctionPortal.BusinessLayer.QueryObjects
 			return new SimplePredicate(nameof(Auction.Name), ValueComparingOperator.Equal, filter.Name);
 		}
 
-		private static SimplePredicate FilterProductId(AuctionFilterDto filter)
+		private static SimplePredicate FilterAccountId(AuctionFilterDto filter)
 		{
-			if (filter.ProductId.Equals(Guid.Empty))
+			if (filter.AccountId.Equals(Guid.Empty))
 			{
 				return null;
 			}
-			return new SimplePredicate(nameof(Auction.ProductId), ValueComparingOperator.Equal, filter.ProductId);
+			return new SimplePredicate(nameof(Auction.AccountId), ValueComparingOperator.Equal, filter.AccountId);
 		}
 
 		private static SimplePredicate FilterClosingTime(AuctionFilterDto filter)

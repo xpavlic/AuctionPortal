@@ -18,7 +18,7 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects
 
         public Guid CategoryId { get; set; }
 
-        public Guid ProductId { get; set; }
+        public Guid AccountId { get; set; }
 
         public override string ToString()
         {
@@ -35,7 +35,7 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects
                    ClosingTime == dTO.ClosingTime &&
                    Description == dTO.Description &&
                    CategoryId.Equals(dTO.CategoryId) &&
-                   ProductId.Equals(dTO.ProductId);
+                   AccountId.Equals(dTO.AccountId);
         }
 
         public override int GetHashCode()
@@ -47,7 +47,7 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects
             hashCode = hashCode * -1521134295 + ClosingTime.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
             hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(CategoryId);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(ProductId);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(AccountId);
             return hashCode;
         }
     }
