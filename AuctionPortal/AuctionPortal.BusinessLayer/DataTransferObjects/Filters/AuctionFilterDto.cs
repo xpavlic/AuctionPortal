@@ -11,7 +11,7 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects.Filters
 
         public string Name { get; set; }
 
-        public Guid ProductId { get; set; }
+        public Guid AccountId { get; set; }
 
         public DateTime ClosingTime { get; set; }
 

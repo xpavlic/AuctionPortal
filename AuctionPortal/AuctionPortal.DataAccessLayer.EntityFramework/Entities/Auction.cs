@@ -31,9 +31,9 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Entities
 
 		public virtual Category Category { get; set; }
 
-		[ForeignKey(nameof(Product))]
-		public Guid ProductId { get; set; }
+		[ForeignKey(nameof(Account))]
+		public Guid? AccountId { get; set; }
 
-		public virtual Product Product { get; set; }
+		public virtual Account Account { get; set; }
 	}
 }

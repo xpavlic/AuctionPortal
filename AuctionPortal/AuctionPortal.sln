@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionPortal.BusinessLayer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionPortal.DataAccessLayer.EntityFramework.Tests", "AuctionPortal.DataAccessLayer.EntityFramework.Tests\AuctionPortal.DataAccessLayer.EntityFramework.Tests.csproj", "{C33D3D59-26A1-4A75-9A5C-76E196C72D47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionPortal.WebApi", "AuctionPortal.WebApi\AuctionPortal.WebApi.csproj", "{F3E1C0C6-1FE5-43F7-86EB-278B7EC87347}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionPortal.PresentationLayer", "AuctionPortal.PresentationLayer\AuctionPortal.PresentationLayer.csproj", "{29AB98CF-DCFA-4FA5-A3DE-6019175F7C96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,14 @@ Global
 		{C33D3D59-26A1-4A75-9A5C-76E196C72D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C33D3D59-26A1-4A75-9A5C-76E196C72D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C33D3D59-26A1-4A75-9A5C-76E196C72D47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3E1C0C6-1FE5-43F7-86EB-278B7EC87347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E1C0C6-1FE5-43F7-86EB-278B7EC87347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E1C0C6-1FE5-43F7-86EB-278B7EC87347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E1C0C6-1FE5-43F7-86EB-278B7EC87347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29AB98CF-DCFA-4FA5-A3DE-6019175F7C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29AB98CF-DCFA-4FA5-A3DE-6019175F7C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29AB98CF-DCFA-4FA5-A3DE-6019175F7C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29AB98CF-DCFA-4FA5-A3DE-6019175F7C96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,9 +18,9 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Entities
 
 		public string ProductImgUrl { get; set; }
 
-        [ForeignKey(nameof(Auction))]
-        public Guid AuctionId { get; set; }
+		[ForeignKey(nameof(Auction))]
+		public Guid AuctionId { get; set; }
 
-        public virtual Auction Auction { get; set; }
-    }
+		public virtual Auction Auction { get; set; }
+	}
 }

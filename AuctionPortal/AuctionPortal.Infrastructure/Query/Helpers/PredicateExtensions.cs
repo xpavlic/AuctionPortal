@@ -17,7 +17,7 @@ namespace AuctionPortal.Infrastructure.Query.Helpers
                 {ValueComparingOperator.LessThan, rightOperand => $" < {rightOperand}" },
                 {ValueComparingOperator.LessThanOrEqual, rightOperand => $" <= {rightOperand}" },
                 {ValueComparingOperator.StringContains, rightOperand => $" LIKE '%{rightOperand}%'"}
-            };
+			};
 
         public static string BuildCompositePredicate(this CompositePredicate compositePredicate)
         {

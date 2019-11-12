@@ -27,13 +27,6 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.QueryTests
 			QueryResult<Auction> actualQueryResult;
 			var auctionQuery = Initializer.Container.Resolve<IQuery<Auction>>();
 
-			Product kodiaq = new Product
-			{
-				Id = Guid.Parse("defdf092-ec30-489d-899b-43d4fda72098"),
-				Name = "Skoda Kodiaq",
-				ProductImgUrl = @"\Content\Images\Products\skoda_kodiaq.jpeg"
-			};
-
 			var expectedQueryResult = new QueryResult<Auction>(new List<Auction> { new Auction
 			{
 				Id = kodiaqAuction,
@@ -42,9 +35,7 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.QueryTests
 				Name = "Skoda Kodiaq Auction",
 				ActualPrice = 800_000,
 				ClosingTime = new DateTime(2020, 1, 1),
-				IsOpened = true,
-				Product = kodiaq,
-				ProductId = kodiaq.Id
+				IsOpened = true
 			}}, 1);
 
 			var predicate = new SimplePredicate(nameof(Auction.CategoryId), ValueComparingOperator.Equal, skodaCategoryId);
@@ -62,13 +53,6 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.QueryTests
 			QueryResult<Auction> actualQueryResult;
 			var auctionQuery = Initializer.Container.Resolve<IQuery<Auction>>();
 
-			Product kodiaq = new Product
-			{
-				Id = Guid.Parse("defdf092-ec30-489d-899b-43d4fda72098"),
-				Name = "Skoda Kodiaq",
-				ProductImgUrl = @"\Content\Images\Products\skoda_kodiaq.jpeg"
-			};
-
 			var expectedQueryResult = new QueryResult<Auction>(new List<Auction>{new Auction
 			{
 				Id = kodiaqAuction,
@@ -77,9 +61,7 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.QueryTests
 				Name = "Skoda Kodiaq Auction",
 				ActualPrice = 800_000,
 				ClosingTime = new DateTime(2020, 1, 1),
-				IsOpened = true,
-				Product = kodiaq,
-				ProductId = kodiaq.Id
+				IsOpened = true
 			}}, 1);
 
 			var predicate = new CompositePredicate(new List<IPredicate>
@@ -87,8 +69,8 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.QueryTests
 				new SimplePredicate(nameof(Auction.CategoryId), ValueComparingOperator.Equal, skodaCategoryId),
 				new CompositePredicate(new List<IPredicate>
 				{
-					new SimplePredicate(nameof(Auction.ClosingTime), ValueComparingOperator.GreaterThan, new DateTime(2019, 12, 12)),
-					new SimplePredicate(nameof(Auction.ClosingTime), ValueComparingOperator.LessThan, new DateTime(2020, 3, 3))
+					new SimplePredicate(nameof(Auction.ClosingTime), ValueComparingOperator.GreaterThan, new DateTime(2019, 11, 11).ToString("yyyy-MM-dd HH:mm:ss.fff")),
+					new SimplePredicate(nameof(Auction.ClosingTime), ValueComparingOperator.LessThan, new DateTime(2020, 3, 3).ToString("yyyy-MM-dd HH:mm:ss.fff"))
 				}),
 				new CompositePredicate(new List<IPredicate>
 				{
@@ -110,13 +92,6 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.QueryTests
 			QueryResult<Auction> actualQueryResult;
 			var auctionQuery = Initializer.Container.Resolve<IQuery<Auction>>();
 
-			Product kodiaq = new Product
-			{
-				Id = Guid.Parse("defdf092-ec30-489d-899b-43d4fda72098"),
-				Name = "Skoda Kodiaq",
-				ProductImgUrl = @"\Content\Images\Products\skoda_kodiaq.jpeg"
-			};
-
 			var expectedQueryResult = new QueryResult<Auction>(new List<Auction>{new Auction
 			{
 				Id = kodiaqAuction,
@@ -125,9 +100,7 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Tests.QueryTests
 				Name = "Skoda Kodiaq Auction",
 				ActualPrice = 800_000,
 				ClosingTime = new DateTime(2020, 1, 1),
-				IsOpened = true,
-				Product = kodiaq,
-				ProductId = kodiaq.Id
+				IsOpened = true
 			}}, 1);
 
 			using (unitOfWorkProvider.Create())

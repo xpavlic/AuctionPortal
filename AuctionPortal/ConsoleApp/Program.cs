@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using AuctionPortal.DataAccessLayer.EntityFramework;
-using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
 
 namespace ConsoleApp
 {
@@ -9,15 +8,6 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-	        using (var context = new AuctionPortalDbContext())
-	        {
-				List<Product> products = new List<Product>(context.Products);
-				foreach (var VARIABLE in products)
-				{
-		            Console.WriteLine(VARIABLE.Name);
-				}
-			}
-
 	        Console.ReadKey();
         }
     }

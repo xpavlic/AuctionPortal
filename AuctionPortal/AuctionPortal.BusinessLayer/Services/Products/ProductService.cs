@@ -20,7 +20,7 @@ namespace AuctionPortal.BusinessLayer.Services.Products
 
         protected override Task<Product> GetWithIncludesAsync(Guid entityId)
         {
-            return Repository.GetAsync(entityId, nameof(Product.Auction));
+            return Repository.GetAsync(entityId);
         }
 
         public async Task<ProductDTO> GetProductByNameAsync(string name)
