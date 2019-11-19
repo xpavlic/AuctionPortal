@@ -58,6 +58,7 @@
     <Compile Include="DataTransferObjects\Filters\CategoryFilterDto.cs" />
     <Compile Include="DataTransferObjects\Filters\ProductFilterDto.cs" />
     <Compile Include="DataTransferObjects\ProductDTO.cs" />
+    <Compile Include="Facades\Common\FacadeBase.cs" />
     <Compile Include="QueryObjects\AccountAuctionRelationQueryBase.cs" />
     <Compile Include="QueryObjects\AccountQueryObject.cs" />
     <Compile Include="QueryObjects\AuctionQueryObject.cs" />

@@ -41,7 +41,7 @@ namespace AuctionPortal.Infrastructure.EntityFramework
 
             if (DesiredPage > 0)
             {
-                var items = (await Context.Set<TEntity>().SqlQuery(sql.ToString()).ToListAsync()).Skip((DesiredPage.Value - 1) * PageSize).Take(PageSize).ToList();
+                var items = (await Context.Database.SqlQuery<TEntity>(sql.ToString()).ToListAsync()).Skip((DesiredPage.Value - 1) * PageSize).Take(PageSize).ToList();
                 result = new QueryResult<TEntity>(items, items.Count, PageSize, DesiredPage);
             }
             else
