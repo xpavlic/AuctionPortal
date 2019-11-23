@@ -19,5 +19,9 @@ namespace AuctionPortal.BusinessLayer.Services.Accounts
         void Delete(Guid entityId);
 
         Task<QueryResultDto<AccountDTO, AccountFilterDto>> ListAllAsync();
+
+        Task<Guid> RegisterAccountAsync(AccountCreateDTO accountDto);
+
+        Task<(bool success, bool isAdministrator)> AuthorizeAccountAsync(string email, string password);
     }
 }

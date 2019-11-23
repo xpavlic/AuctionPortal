@@ -35,6 +35,10 @@
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.3.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Config\MappingConfig.cs" />
     <Compile Include="DataTransferObjects\AccountAuctionRelationDTO.cs" />
+    <Compile Include="DataTransferObjects\AccountCreateDTO.cs" />
     <Compile Include="DataTransferObjects\AccountDTO.cs" />
     <Compile Include="DataTransferObjects\AuctionDTO.cs" />
     <Compile Include="DataTransferObjects\CategoryDTO.cs" />
@@ -58,6 +63,8 @@
     <Compile Include="DataTransferObjects\Filters\CategoryFilterDto.cs" />
     <Compile Include="DataTransferObjects\Filters\ProductFilterDto.cs" />
     <Compile Include="DataTransferObjects\ProductDTO.cs" />
+    <Compile Include="Facades\AccountFacade.cs" />
+    <Compile Include="Facades\AuctionFacade.cs" />
     <Compile Include="Facades\Common\FacadeBase.cs" />
     <Compile Include="QueryObjects\AccountAuctionRelationQueryBase.cs" />
     <Compile Include="QueryObjects\AccountQueryObject.cs" />
