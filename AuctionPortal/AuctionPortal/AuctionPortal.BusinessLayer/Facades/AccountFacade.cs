@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Common;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
 using AuctionPortal.BusinessLayer.Facades.Common;
 using AuctionPortal.BusinessLayer.Services.Accounts;
-using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
 using AuctionPortal.Infrastructure.UnitOfWork;
-using Microsoft.Win32;
 
 namespace AuctionPortal.BusinessLayer.Facades
 {

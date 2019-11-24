@@ -8,5 +8,7 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects.Filters
         public Guid AccountId { get; set; }
 
         public Guid AuctionId { get; set; }
+
+		public decimal BidValue { get; set; }
     }
 }

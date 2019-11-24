@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
-using AuctionPortal.BusinessLayer.DataTransferObjects.Common;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
 using AuctionPortal.BusinessLayer.QueryObjects.Common;
 using AuctionPortal.BusinessLayer.Services.Common;

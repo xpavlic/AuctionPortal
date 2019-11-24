@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
-using AuctionPortal.BusinessLayer.QueryObjects;
 using AuctionPortal.BusinessLayer.QueryObjects.Common;
 using AuctionPortal.BusinessLayer.Services.Common;
 using AuctionPortal.DataAccessLayer.EntityFramework.Entities;

@@ -18,6 +18,11 @@ namespace AuctionPortal.BusinessLayer.QueryObjects
 
 		protected override IQuery<AccountAuctionRelation> ApplyWhereClause(IQuery<AccountAuctionRelation> query, AccountAuctionRelationFilterDto filter)
 		{
+			if (filter.BidValue < 0 || filter.BidValue == decimal.MaxValue)
+			{
+				return query;
+			}
+
 			if (filter.AuctionId.Equals(Guid.Empty) || filter.AccountId.Equals(Guid.Empty))
 			{
 				return query;
@@ -27,6 +32,7 @@ namespace AuctionPortal.BusinessLayer.QueryObjects
 			{
 				new SimplePredicate(nameof(AccountAuctionRelation.AuctionId), ValueComparingOperator.Equal, filter.AuctionId),
 				new SimplePredicate(nameof(AccountAuctionRelation.AccountId), ValueComparingOperator.Equal, filter.AccountId),
+				new SimplePredicate(nameof(AccountAuctionRelation.BidValue), ValueComparingOperator.Equal, filter.BidValue)
 			};
 			var predicate = new CompositePredicate(accountAuctionRelationPredicates);
 			return query.Where(predicate);

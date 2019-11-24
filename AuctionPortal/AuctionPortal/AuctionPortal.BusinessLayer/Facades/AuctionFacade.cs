@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Resources;
-using System.Text;
 using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
@@ -12,7 +10,6 @@ using AuctionPortal.BusinessLayer.Services.Auctions;
 using AuctionPortal.BusinessLayer.Services.Bids;
 using AuctionPortal.BusinessLayer.Services.Categories;
 using AuctionPortal.BusinessLayer.Services.Products;
-using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
 using AuctionPortal.Infrastructure.UnitOfWork;
 
 namespace AuctionPortal.BusinessLayer.Facades
@@ -58,7 +55,7 @@ namespace AuctionPortal.BusinessLayer.Facades
             }
         }
 
-        public async Task<Guid> CreateAuctiontWithCategoryNameAsync(AuctionDTO auction, string categoryName)
+        public async Task<Guid> CreateAuctionWithCategoryNameAsync(AuctionDTO auction, string categoryName)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -69,7 +66,7 @@ namespace AuctionPortal.BusinessLayer.Facades
             }
         }
 
-        public async Task<bool> EditAcutionAsync(AuctionDTO auctionDto)
+        public async Task<bool> EditAuctionAsync(AuctionDTO auctionDto)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {

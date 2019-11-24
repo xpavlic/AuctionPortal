@@ -8,6 +8,7 @@ namespace AuctionPortal.PresentationLayer.Controllers
 {
     public class HomeController : Controller
     {
+		[AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -15,14 +16,14 @@ namespace AuctionPortal.PresentationLayer.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Auction portal description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Our contact page.";
 
             return View();
         }
