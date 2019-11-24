@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace AuctionPortal.PresentationLayer.Controllers
 {
+	[AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -15,14 +16,14 @@ namespace AuctionPortal.PresentationLayer.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Auction portal description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Our contact page.";
 
             return View();
         }
