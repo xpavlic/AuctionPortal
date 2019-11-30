@@ -20,7 +20,9 @@ namespace AuctionPortal.PresentationLayer
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
+
+            BootstrapContainer();
+		}
 
 		private void BootstrapContainer()
 		{
