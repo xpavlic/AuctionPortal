@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -40,6 +43,14 @@ namespace AuctionPortal.PresentationLayer.Controllers
 				ModelState.AddModelError("Email Address", "Account with that email address already exists!");
 				return View();
 			}
+			catch (DbEntityValidationException)
+			{
+				return View();
+			}
+			catch (SqlException)
+			{
+				return View();
+			}
 		}
 
 		public ActionResult Login()
@@ -75,6 +86,16 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			}
 			ModelState.AddModelError("", "Wrong email address or password!");
 			return View();
+		}
+
+		public async Task<ActionResult> Logout()
+		{
+			var account = await AccountFacade.GetAccountAccordingToEmailAsync(User.Identity.Name);
+			//Response.ClearAllShoppingCartItems(customer.Username);
+			//OrderFacade.ReleaseReservations(customer.Id);
+
+			FormsAuthentication.SignOut();
+			return RedirectToAction("Index", "Home");
 		}
 	}
 }

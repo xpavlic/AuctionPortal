@@ -15,6 +15,7 @@ namespace AuctionPortal.BusinessLayer.Config
 			config.CreateMap<Category, CategoryDTO>().ReverseMap();
 			config.CreateMap<Account, AccountDTO>().ReverseMap();
 			config.CreateMap<Auction, AuctionDTO>().ReverseMap();
+			config.CreateMap<Account, AccountCreateDTO>().ReverseMap();
 			config.CreateMap<AccountAuctionRelation, AccountAuctionRelationDTO>().ReverseMap();
 			config.CreateMap<QueryResult<Product>, QueryResultDto<ProductDTO, ProductFilterDto>>();
 			config.CreateMap<QueryResult<Category>, QueryResultDto<CategoryDTO, CategoryFilterDto>>();

@@ -34,5 +34,10 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Entities
 		public string Address { get; set; }
 
 		public DateTime BirthDate { get; set; }
+
+		public override string ToString()
+		{
+			return $"x{Email}x, x{Password}x";
+		}
 	}
 }

@@ -43,7 +43,7 @@ namespace AuctionPortal.BusinessLayer.Services.Accounts
 
         private async Task<bool> GetIfAccountExistsAsync(string email)
         {
-            var queryResult = await Query.ExecuteQuery(new AccountFilterDto { Email = email});
+            var queryResult = await Query.ExecuteQuery(new AccountFilterDto { Email = email });
             return (queryResult.Items.Count() == 1);
         }
 

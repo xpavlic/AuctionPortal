@@ -1,0 +1,172 @@
+﻿@using System.Web.Mvc.Html
+@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Common
+
+@model AuctionPortal.PresentationLayer.Models.Auctions.AuctionListViewModel
+
+@{
+	ViewBag.Title = "AuctionListView";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+	@Styles.Render("~/Content/css/tree.css")
+	@Styles.Render("~/Content/css/PagedList.css")
+	@Styles.Render("~/Content/themes/base/jquery-ui.css")
+}
+
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel-heading panel-head">Categories</div>
+		@using (Html.BeginForm())
+		{
+
+			<div class="tree">
+				@for (var i = 0; i < Model.Categories.Count; i++)
+				{
+					if (Model.Categories[i].HasParent)
+					{
+						continue;
+					}
+					<ul>
+						<li>
+							<a href="#">
+								@*@Html.CheckBoxFor(model => model.Categories[i].IsActive, new { @class = "tree-checkbox parent", @id = @Model.Categories[i].Id })*@
+								@Html.HiddenFor(model => model.Categories[i].Id)
+								@Html.HiddenFor(model => model.Categories[i].Name)
+								@Html.HiddenFor(model => model.Categories[i].ParentId)
+								<label for=@i>
+									@Html.DisplayFor(model => model.Categories[i].Name)
+								</label>
+							</a>
+
+							<ul>
+								@for (var j = 0; j < Model.Categories.Count; j++)
+								{
+									if (!Model.Categories[j].HasParent || Model.Categories[j].ParentId != Model.Categories[i].Id)
+									{
+										continue;
+									}
+									@Html.HiddenFor(model => model.Categories[j].Id)
+									@Html.HiddenFor(model => model.Categories[j].Name)
+									@Html.HiddenFor(model => model.Categories[j].ParentId)
+									<li>
+										<a href="#">
+											@*@Html.CheckBoxFor(model => model.Categories[j].IsActive, new { @class = "tree-checkbox node-item", @iid = i + "" + j })*@
+
+											<label for=@i@j>
+												@Html.DisplayFor(model => model.Categories[j].Name)
+											</label>
+										</a>
+									</li>
+
+								}
+							</ul>
+						</li>
+					</ul>
+				}
+			</div>
+
+			<div class="form-group text-center">
+				<b>
+					Price: <span id="spanOutput"></span>
+				</b>
+				<div id="slider" class="justify-content-center "></div>
+				<input id="txtMin" type="hidden" name="Filter.MinimalPrice" />
+				<input id="txtMax" type="hidden" name="Filter.MaximalPrice" />
+			</div>
+			<br />
+
+			<div class="form-group form-row col-md-12">
+				@Html.LabelFor(model => model.Filter.Name, "Product Name", new { @class = "col-form-label col-md-4" })
+				<div class="col-md-8">
+					@Html.EditorFor(model => model.Filter.Name, new { htmlAttributes = new { @class = "form-control" } })
+					@Html.ValidationMessageFor(model => model.Filter.Name, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group form-row col-md-12">
+				@Html.LabelFor(model => model.Filter.SortCriteria, "Sort by:", new { @class = "col-form-label col-md-4" })
+				<div class="col-md-8">
+					@Html.DropDownListFor(model => model.Filter.SortCriteria, Model.AllSortCriteria, "Select...", new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.Filter.SortCriteria, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-check form-row">
+				@Html.LabelFor(model => model.Filter.SortAscending, "Ascending", new { @class = "form-check-label" })
+				@Html.CheckBoxFor(model => model.Filter.SortAscending, new { htmlAttributes = new { @class = "form-check-input" } })
+				@Html.ValidationMessageFor(model => model.Filter.SortAscending, "", new { @class = "text-danger" })
+			</div>
+
+			<div class="row btn-toolbar justify-content-around" role="toolbar" style="margin-bottom:5px">
+				<div class="btn-group">
+					<input type="button" class="btn btn-danger" value="Clear" onclick="resetRange();location.href = '@Url.Action("ClearFilter", "Auctions")'" />
+				</div>
+				<div class="btn-group">
+					<button class="btn btn-success" id="btnSubmit" type="submit" onclick="saveRange()">Filter </button>
+				</div>
+			</div>
+
+		}
+
+		<div class="row justify-content-center">
+			@Html.PagedListPager(Model.Auctions, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+	   {
+		   LiElementClasses = new string[] { "page-item" },
+		   PageClasses = new string[] { "page-link" }
+	   })
+		</div>
+	</div>
+
+	<div class="col-md-9">
+		<div class="card-deck mb-3 text-center">
+			@{foreach (var auction in Model.Auctions)
+				{
+					<div class="col-md-4 d-flex py-2">
+						<div class="card clickable-area" @("onclick=GoToDetail('" + auction.Id + "')")>
+							<div class="d-flex justify-content-end">
+							</div>
+							@*<img src="@product.ProductImgUri" class="card-img-top" style="width:100%; height: 15vw;" alt="Product image">*@
+							<div class="card-body">
+								<h5 class="card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="thumbnail-label">@auction.Name</h5>
+								<div class="caption text-center"></div>
+								<div class="row container">
+									<div class="col-md-12">
+										<p>
+											<strong class="text-primary">@auction.ActualPrice.ToString("N2"),- CZK</strong>
+										</p>
+									</div>
+								</div>
+								<p class="card-text" style="height: 80px; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: normal; text-align: justify;">
+									@auction.Description
+								</p>
+								@*if (product.CurrentlyAvailableUnits.HasValue && product.CurrentlyAvailableUnits.Value > 0)
+								{
+									<input type="button" class="btn btn-primary" value="Add to shopping cart" onclick="location.href = '@Url.Action("AddItem", "ShoppingCart", new {id = product.Id})'" />
+								}
+								else
+								{
+									<input type="button" class="btn btn-danger disabled" value="Out of stock" />
+								}*@
+							</div>
+						</div>
+					</div>
+				}}
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	function GoToDetail(id) {
+		window.location = "/Auctions/Details/" + id;
+	}
+</script>
+
+@section scripts{
+	@Scripts.Render("~/Scripts/tree.js")
+	@Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
+	@Scripts.Render("~/Scripts/slider.js")
+}

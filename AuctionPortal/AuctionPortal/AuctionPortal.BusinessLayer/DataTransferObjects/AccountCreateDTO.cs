@@ -38,7 +38,7 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects
         [StringLength(30, MinimumLength = 6, ErrorMessage = "Password length must be between 6 and 30")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Specify if is Administrator Account")]
-        public bool IsAdministrator { get; set; }
+        //[Required(ErrorMessage = "Specify if is Administrator Account")]
+        //public bool IsAdministrator { get; set; }
     }
 }

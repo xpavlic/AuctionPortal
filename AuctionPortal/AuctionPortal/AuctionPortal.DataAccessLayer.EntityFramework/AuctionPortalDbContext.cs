@@ -1,22 +1,23 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using System.Data.Entity;
 using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
 
 namespace AuctionPortal.DataAccessLayer.EntityFramework
 {
-    public class AuctionPortalDbContext : DbContext
+    public sealed class AuctionPortalDbContext : DbContext
     {
 		private const string MartinPC = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=C:\\Users\\Martin\\Desktop\\c#\\Database.mdf;Integrated Security = True;";
 		private const string School = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=J:\\pv179\\Database.mdf;Integrated Security = True;";
 
-		private const string ConnectionString = School;
+		private const string ConnectionString = MartinPC;
 
         /// <summary>
         /// Non-parametric ctor used by data access layer
         /// </summary>
         public AuctionPortalDbContext() : base(ConnectionString)
         {
-            //Database.SetInitializer(new DatabaseInitializer());
+	        //Database.SetInitializer(new DatabaseInitializer());
         }
 
         /// <summary>

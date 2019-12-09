@@ -37,11 +37,11 @@ namespace AuctionPortal.WebApi.Controllers
 		        CategoryNames = category,
 	        };
 	        var auctions = (await AuctionFacade.GetAllAuctionsAsync(filter));
-	        foreach (var auction in auctions)
+	        foreach (var auction in auctions.Items)
 	        {
 		        auction.Id = Guid.Empty;
 	        }
-	        return auctions;
+	        return auctions.Items;
         }
 
 		/// <summary>
@@ -87,7 +87,7 @@ namespace AuctionPortal.WebApi.Controllers
 		/// Updates auction with given id.
 		/// </summary>
 		/// <param name="id">Id of the auction to update.</param>
-		/// <param name="product">Auction to update</param>
+		/// <param name="auction">Auction to update</param>
 		/// <returns>Message describing the action result.</returns>
 		public async Task<string> Put(Guid id, [FromBody]AuctionDTO auction)
         {
@@ -100,7 +100,7 @@ namespace AuctionPortal.WebApi.Controllers
 	        {
 		        throw new HttpResponseException(HttpStatusCode.NotFound);
 	        }
-	        return $"Updated product with id: {id}";
+	        return $"Updated auction with id: {id}";
         }
 
 		/// <summary>
@@ -115,7 +115,7 @@ namespace AuctionPortal.WebApi.Controllers
 	        {
 		        throw new HttpResponseException(HttpStatusCode.NotFound);
 	        }
-	        return $"Deleted product with id: {id}";
+	        return $"Deleted auction with id: {id}";
         }
 	}
 }

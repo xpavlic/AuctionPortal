@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
+using AuctionPortal.BusinessLayer.DataTransferObjects.Common;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
 using AuctionPortal.BusinessLayer.Facades.Common;
 using AuctionPortal.BusinessLayer.Services.Accounts;
@@ -31,12 +32,16 @@ namespace AuctionPortal.BusinessLayer.Facades
             this.bidService = bidService;
         }
 
-        public async Task<IEnumerable<AuctionDTO>> GetAllAuctionsAsync(AuctionFilterDto filter)
+        public async Task<QueryResultDto<AuctionDTO, AuctionFilterDto>> GetAllAuctionsAsync(AuctionFilterDto filter)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return (await auctionService.ListAllAsync()).Items;
-            }
+				if (filter.CategoryIds == null && filter.CategoryNames != null)
+				{
+					filter.CategoryIds = await categoryService.GetCategoryIdsByNamesAsync(filter.CategoryNames);
+				}
+				return await auctionService.ListAuctionsAsync(filter);
+			}
         }
 
         public async Task<AuctionDTO> GetAuctionAsync(Guid id)

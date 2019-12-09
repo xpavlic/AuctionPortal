@@ -1,0 +1,31 @@
+﻿@model AuctionPortal.BusinessLayer.DataTransferObjects.AuctionDTO
+
+@{
+	ViewBag.Title = "AuctionDetailView";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+	<div class="row">
+		<div class="col-md-4">
+			@*<img src="@Model.ProductImgUri" class="img-fluid">*@
+		</div>
+		<div class="col-sm-8">
+			<h3>@Html.DisplayFor(model => model.Name)</h3>
+
+			<div class="row text-justify top-buffer-small col-sm-12">@Html.DisplayFor(model => model.Description)</div>
+
+			<div class="row top-buffer-small col-sm-12">
+				@{
+					<div class="row">
+						<div class="col-sm-4">
+							<span>Actual price: <strong class="text-danger"><del>@Model.ActualPrice.ToString("N2"),- CZK</del></strong></span>
+						</div>
+					</div>
+				}
+			</div>
+
+			<p>
+				@Html.ActionLink("Back to all auctions", "Index")
+			</p>
+		</div>
+	</div>
