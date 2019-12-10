@@ -18,8 +18,14 @@ namespace AuctionPortal.BusinessLayer.Facades
             this.accountService = accountService;
         }
 
-
-        public async Task<AccountDTO> GetAccountAccordingToEmailAsync(string email)
+        public async Task<AccountDTO> GetAccountAccordingToIdAsync(Guid id)
+        {
+	        using (UnitOfWorkProvider.Create())
+	        {
+		        return await accountService.GetAccountAccordingToIdAsync(id);
+	        }
+        }
+		public async Task<AccountDTO> GetAccountAccordingToEmailAsync(string email)
         {
             using (UnitOfWorkProvider.Create())
             {

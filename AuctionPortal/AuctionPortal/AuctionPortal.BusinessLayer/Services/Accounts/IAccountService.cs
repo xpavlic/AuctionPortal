@@ -8,7 +8,9 @@ namespace AuctionPortal.BusinessLayer.Services.Accounts
 {
     public interface IAccountService
     {
-        Task<AccountDTO> GetAccountAccordingToEmailAsync(string email);
+	    Task<AccountDTO> GetAccountAccordingToIdAsync(Guid id);
+
+		Task<AccountDTO> GetAccountAccordingToEmailAsync(string email);
 
         Task<AccountDTO> GetAsync(Guid entityId, bool withIncludes = true);
 

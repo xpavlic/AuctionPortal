@@ -23,7 +23,7 @@ namespace AuctionPortal.BusinessLayer.QueryObjects
 			AddIfDefined(FilterName(filter), definedPredicates);
 			AddIfDefined(FilterAccountId(filter), definedPredicates);
 			AddIfDefined(FilterClosingTime(filter), definedPredicates);
-			AddIfDefined(FilterActualPrice(filter), definedPredicates);
+			//AddIfDefined(FilterActualPrice(filter), definedPredicates);
 
 			if (definedPredicates.Count == 0)
 			{
