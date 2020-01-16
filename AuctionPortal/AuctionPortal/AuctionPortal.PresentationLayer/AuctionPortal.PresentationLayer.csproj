@@ -141,12 +141,16 @@
     <Compile Include="App_Start\Windsor\PresentationLayerInstaller.cs" />
     <Compile Include="App_Start\Windsor\WindsorControllerFactory.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Admin\AdminAccountsController.cs" />
+    <Compile Include="Controllers\Admin\AdminAuctionsController.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Accounts\LoginModel.cs" />
+    <Compile Include="Models\AdminAuctions\AdminAuctionEditModel.cs" />
+    <Compile Include="Models\Auctions\AuctionDetailViewModel.cs" />
     <Compile Include="Models\Auctions\AuctionListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -178,6 +182,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Views\AdminAccounts\Details.cshtml" />
+    <Content Include="Views\AdminAccounts\Index.cshtml" />
+    <Content Include="Views\AdminAuctions\Create.cshtml" />
+    <Content Include="Views\AdminAuctions\Edit.cshtml" />
+    <Content Include="Views\AdminAuctions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuctionPortal.BusinessLayer\AuctionPortal.BusinessLayer.csproj">

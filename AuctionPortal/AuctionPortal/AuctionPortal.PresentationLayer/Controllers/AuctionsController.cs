@@ -12,14 +12,16 @@ using X.PagedList;
 
 namespace AuctionPortal.PresentationLayer.Controllers
 {
-    public class AuctionsController : Controller
-    {
+	public class AuctionsController : Controller
+	{
 		public const int PageSize = 9;
 
 		private const string FilterSessionKey = "filter";
 		private const string CategoryTreesSessionKey = "categoryTrees";
 
 		public AuctionFacade AuctionFacade { get; set; }
+		public AccountFacade AccountFacade { get; set; }
+		public ProductFacade ProductFacade { get; set; }
 
 		public async Task<ActionResult> Index(int page = 1)
 		{
@@ -59,8 +61,39 @@ namespace AuctionPortal.PresentationLayer.Controllers
 
 		public async Task<ActionResult> Details(Guid id)
 		{
-			var model = await AuctionFacade.GetAuctionAsync(id);
+			var result = await AuctionFacade.GetAuctionAsync(id);
+			var model = await InitializeAuctionDetailViewModel(result);
 			return View("AuctionDetailView", model);
+		}
+
+		private async Task<AuctionDetailViewModel> InitializeAuctionDetailViewModel(AuctionDTO auction)
+		{
+			//return new AuctionDetailViewModel
+			//{
+			//	Name = auction.Name,
+			//	AccountFullName = AccountFacade.GetAccountAccordingToIdAsync(auction.AccountId).Result.FirstName + " " + 
+			//	              AccountFacade.GetAccountAccordingToIdAsync(auction.AccountId).Result.LastName,
+			//	Description = auction.Description,
+			//	ClosingTime = auction.ClosingTime,
+			//	Products = ProductFacade.GetAllProductsInAuction(auction.Id).Result.ToList(),
+			//	ActualPrice = auction.ActualPrice,
+			//	IsOpened = auction.IsOpened
+			//};
+
+			var model = new AuctionDetailViewModel();
+			model.Name = auction.Name;
+			var result = await AccountFacade.GetAccountAccordingToIdAsync(auction.AccountId);
+
+
+			model.AccountFullName = result.FirstName + " " + result.LastName;
+			model.Description = auction.Description;
+			model.ClosingTime = auction.ClosingTime;
+			//var products = await ProductFacade.GetAllProductsInAuction(auction.Id);
+			//model.Products = products.ToList();
+			model.ActualPrice = auction.ActualPrice;
+			model.IsOpened = auction.IsOpened;
+
+			return model;
 		}
 
 		private async Task<AuctionListViewModel> InitializeAuctionListViewModel(QueryResultDto<AuctionDTO, AuctionFilterDto> result, int totalItemsCount, IList<CategoryDTO> categories = null)

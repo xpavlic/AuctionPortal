@@ -22,6 +22,12 @@ namespace AuctionPortal.BusinessLayer.Services.Accounts
             return await Repository.GetAsync(entityId);
         }
 
+        public async Task<AccountDTO> GetAccountAccordingToIdAsync(Guid id)
+        {
+            var queryResult = await Query.ExecuteQuery(new AccountFilterDto { Id = id });
+            return queryResult.Items.SingleOrDefault();
+        }
+
         public async Task<AccountDTO> GetAccountAccordingToEmailAsync(string email)
         {
             var queryResult = await Query.ExecuteQuery(new AccountFilterDto { Email = email });
