@@ -10,6 +10,9 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework
 		private const string MartinPC = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=C:\\Users\\Martin\\Desktop\\c#\\Database.mdf;Integrated Security = True;";
 		private const string School = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=J:\\pv179\\Database.mdf;Integrated Security = True;";
 
+		private const string Azure =
+			"Server=tcp:auction-portal.database.windows.net,1433;InitialCatalog=AuctionPortalDb;PersistSecurityInfo=False;UserID=PortalAdmin;Password=Qwertz1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;ConnectionTimeout=30;";
+
 		private const string ConnectionString = MartinPC;
 
         /// <summary>
