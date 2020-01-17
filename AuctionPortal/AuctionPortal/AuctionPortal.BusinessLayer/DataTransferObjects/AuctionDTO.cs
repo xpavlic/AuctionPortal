@@ -1,6 +1,7 @@
 ﻿using AuctionPortal.BusinessLayer.DataTransferObjects.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AuctionPortal.BusinessLayer.DataTransferObjects
 {
@@ -12,6 +13,7 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects
 
         public bool IsOpened { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime ClosingTime { get; set; }
 
         public string Description { get; set; }

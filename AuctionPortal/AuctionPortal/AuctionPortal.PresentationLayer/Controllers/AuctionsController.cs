@@ -21,7 +21,7 @@ namespace AuctionPortal.PresentationLayer.Controllers
 
 		public AuctionFacade AuctionFacade { get; set; }
 		public AccountFacade AccountFacade { get; set; }
-		public ProductFacade ProductFacade { get; set; }
+		public ProductFacade ProductFacade { get; set; } //NULL v tomhle controlleru
 
 		public async Task<ActionResult> Index(int page = 1)
 		{
@@ -64,6 +64,19 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			var result = await AuctionFacade.GetAuctionAsync(id);
 			var model = await InitializeAuctionDetailViewModel(result);
 			return View("AuctionDetailView", model);
+		}
+
+		public ActionResult Create()
+		{
+			return View("AuctionCreateView");
+		}
+
+		[HttpPost]
+		public async Task<ActionResult> Create(AuctionDTO auctionDto)
+		{
+			await AuctionFacade.CreateAuctionWithCategoryNameAsync(auctionDto, "Category");
+
+			return RedirectToAction("Index", "Home");
 		}
 
 		private async Task<AuctionDetailViewModel> InitializeAuctionDetailViewModel(AuctionDTO auction)

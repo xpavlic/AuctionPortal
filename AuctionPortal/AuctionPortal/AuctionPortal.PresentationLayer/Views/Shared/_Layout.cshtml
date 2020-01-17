@@ -20,37 +20,38 @@
                 @Html.ActionLink("Auction Portal", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-	            <ul class="nav navbar-nav">
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink("Auctions", "Index", "Auctions")</li>
+
 					@if (Request.IsAuthenticated)
 					{
-					<li>@Html.ActionLink("Auctions", "Index", "Auctions")</li>
+						<li>@Html.ActionLink("Create a new auction", "Create", "Auctions")</li>
 					}
-		            <li>@Html.ActionLink("About", "About", "Home")</li>
-		            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-		            @if (Request.IsAuthenticated)
-		            {
-			            <li class="nav-item dropdown">
-				            <a href="#" class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"><span class="fa fa-user"></span> @User.Identity.Name.Split('@')[0] <b class="caret grey"></b></a>
-				            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					            <div class="dropdown-header">Account management</div>
-					            <div class="dropdown-divider"></div>
-					            @Html.ActionLink("Logout", "Logout", "Account", null, new {@class = "dropdown-item"})
-				            </div>
-			            </li>
-		            }
-		            else
-		            {
-			            <li class="nav-item dropdown">
-				            <a href="#" class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"><span class="fa fa-user"></span><b class="caret grey"></b></a>
-				            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-					            <div class="dropdown-divider"></div>
-					            @Html.ActionLink("Register", "Register", "Account", null, new {@class = "dropdown-item"})
-					            <div class="dropdown-divider"></div>
-					            @Html.ActionLink("Log in", "Login", "Account", null, new {@class = "dropdown-item"})
-				            </div>
-			            </li>
-		            }
-	            </ul>
+					<li>@Html.ActionLink("About", "About", "Home")</li>
+					<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+					@if (Request.IsAuthenticated)
+					{
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"> @User.Identity.Name.Split('@')[0] <b class="caret"></b></a>
+							<div class="dropdown-menu">
+								<div class="dropdown-header">Account management</div>
+								<div class="divider"></div>
+								@Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "dropdown-item" })
+							</div>
+						</li>
+					}
+					else
+					{
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"><b class="caret"></b></a>
+							<div class="dropdown-menu">
+								@Html.ActionLink("Register", "Register", "Account", null, new { @style = "color:black;" })
+								<div class="divider"></div>
+								@Html.ActionLink("Log in", "Login", "Account", null, new { @style = "color:black;" })
+							</div>
+						</li>
+					}
+				</ul>
             </div>
         </div>
     </div>

@@ -187,6 +187,7 @@
     <Content Include="Views\AdminAuctions\Create.cshtml" />
     <Content Include="Views\AdminAuctions\Edit.cshtml" />
     <Content Include="Views\AdminAuctions\Index.cshtml" />
+    <Content Include="Views\Auctions\AuctionCreateView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuctionPortal.BusinessLayer\AuctionPortal.BusinessLayer.csproj">
