@@ -9,8 +9,9 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework
     {
 		private const string MartinPC = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=C:\\Users\\Martin\\Desktop\\c#\\Database.mdf;Integrated Security = True;";
 		private const string School = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=J:\\pv179\\Database.mdf;Integrated Security = True;";
+        private const string HonzaPC = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=C:\\Users\\honza\\OneDrive\\Plocha\\C# Podzim\\Database.mdf;Integrated Security = True;";
 
-		private const string ConnectionString = MartinPC;
+        private const string ConnectionString = HonzaPC;
 
         /// <summary>
         /// Non-parametric ctor used by data access layer

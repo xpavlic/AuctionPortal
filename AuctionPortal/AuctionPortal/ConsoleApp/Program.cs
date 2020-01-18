@@ -15,13 +15,18 @@ namespace ConsoleApp
                 List<Account> accs = new List<Account>(context.Accounts);
                 foreach (var VARIABLE in accs)
                 {
-                    Console.WriteLine(VARIABLE.ToString());
+                    Console.WriteLine(VARIABLE.Id +";" +  VARIABLE.IsAdministrator.ToString());
                 }
 
                 List<Product> asd = new List<Product>(context.Products);
                 foreach (var VARIABLE in asd)
                 {
                     Console.WriteLine(VARIABLE.ToString());
+                }
+                List<Category> cat = new List<Category>(context.Categories);
+                foreach (var VARIABLE in cat)
+                {
+                    Console.WriteLine(VARIABLE.Name);
                 }
 
                 Console.ReadKey();
@@ -37,9 +42,9 @@ namespace ConsoleApp
                 Category child = new Category
                 {
                     Id = Guid.Parse("d527ffa7-0b6c-48f2-8e42-90c6b18f7b81"),
-                    Name = "Child",
-                    Parent = parent,
-                    ParentId = parent.Id
+                    Name = "NoCategory",
+                    Parent = null,
+                    ParentId = null
                 };
 
                 Auction auction = new Auction
@@ -63,10 +68,24 @@ namespace ConsoleApp
                     ProductImgUrl = "asdsd"
                 };
 
-                ////context.Categories.Add(parent);
-                ////context.Categories.Add(child);
+                Account acctoun = new Account
+                {
+                    Address = "asd",
+                    BirthDate = DateTime.Today,
+                    Email = "asd@asd",
+                    FirstName = "admin",
+                    LastName = "admin",
+                    Id = new Guid("0cf65f4d-a568-481d-b73f-fdc026a75cce"),
+                    IsAdministrator = true,
+                    MobilePhoneNumber = "123",
+                    Password = "asd"
+                };
+
+                //context.Categories.Add(parent);
+                //context.Categories.Add(child);
                 ////context.Auctions.Add(auction);
                 ////context.Products.Add(product);
+                //context.Accounts.Add(acctoun);
                 //context.SaveChanges();
             }
             Console.ReadKey();

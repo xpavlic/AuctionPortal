@@ -9,7 +9,7 @@ using System.Web.Security;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
 using AuctionPortal.BusinessLayer.Facades;
 using AuctionPortal.BusinessLayer.Services.Accounts;
-using DemoEshop.PresentationLayer.Models.Accounts;
+using AuctionPortal.PresentationLayer.Models.Accounts;
 
 namespace AuctionPortal.PresentationLayer.Controllers
 {
@@ -89,8 +89,8 @@ namespace AuctionPortal.PresentationLayer.Controllers
 		}
 
 		public async Task<ActionResult> Logout()
-		{
-			var account = await AccountFacade.GetAccountAccordingToEmailAsync(User.Identity.Name);
+        {
+            var account = await AccountFacade.GetAccountAccordingToEmailAsync(User.Identity.Name);
 			//Response.ClearAllShoppingCartItems(customer.Username);
 			//OrderFacade.ReleaseReservations(customer.Id);
 
