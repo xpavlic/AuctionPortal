@@ -10,7 +10,6 @@ using AuctionPortal.BusinessLayer.Services.Accounts;
 using AuctionPortal.BusinessLayer.Services.Auctions;
 using AuctionPortal.BusinessLayer.Services.Bids;
 using AuctionPortal.BusinessLayer.Services.Categories;
-using AuctionPortal.BusinessLayer.Services.Products;
 using AuctionPortal.Infrastructure.UnitOfWork;
 
 namespace AuctionPortal.BusinessLayer.Facades
@@ -23,7 +22,7 @@ namespace AuctionPortal.BusinessLayer.Facades
         private readonly IBidService bidService;
 
         public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService auctionService, ICategoryService categoryService, 
-            IProductService productService, IAccountService accountService, IBidService bidService) 
+            IAccountService accountService, IBidService bidService) 
             : base(unitOfWorkProvider)
         {
             this.auctionService = auctionService;

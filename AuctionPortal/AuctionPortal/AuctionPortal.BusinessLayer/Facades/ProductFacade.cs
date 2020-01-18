@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
-using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
 using AuctionPortal.BusinessLayer.Facades.Common;
 using AuctionPortal.BusinessLayer.Services.Products;
 using AuctionPortal.Infrastructure.UnitOfWork;
@@ -15,7 +12,7 @@ namespace AuctionPortal.BusinessLayer.Facades
     {
         private readonly IProductService productService;
 
-        public ProductFacade(IUnitOfWorkProvider unitOfWorkProvider, ProductService productService) 
+        public ProductFacade(IUnitOfWorkProvider unitOfWorkProvider, IProductService productService) 
             : base(unitOfWorkProvider)
         {
             this.productService = productService;
@@ -29,7 +26,7 @@ namespace AuctionPortal.BusinessLayer.Facades
             }
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetAllAuctionsAsync()
+        public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync()
         {
             using (UnitOfWorkProvider.Create())
             {

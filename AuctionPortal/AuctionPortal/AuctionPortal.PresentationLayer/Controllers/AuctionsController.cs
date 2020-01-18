@@ -21,7 +21,7 @@ namespace AuctionPortal.PresentationLayer.Controllers
 
 		public AuctionFacade AuctionFacade { get; set; }
 		public AccountFacade AccountFacade { get; set; }
-		public ProductFacade ProductFacade { get; set; } //NULL v tomhle controlleru
+		public ProductFacade ProductFacade { get; set; }
 
 		public async Task<ActionResult> Index(int page = 1)
 		{
@@ -81,18 +81,6 @@ namespace AuctionPortal.PresentationLayer.Controllers
 
 		private async Task<AuctionDetailViewModel> InitializeAuctionDetailViewModel(AuctionDTO auction)
 		{
-			//return new AuctionDetailViewModel
-			//{
-			//	Name = auction.Name,
-			//	AccountFullName = AccountFacade.GetAccountAccordingToIdAsync(auction.AccountId).Result.FirstName + " " + 
-			//	              AccountFacade.GetAccountAccordingToIdAsync(auction.AccountId).Result.LastName,
-			//	Description = auction.Description,
-			//	ClosingTime = auction.ClosingTime,
-			//	Products = ProductFacade.GetAllProductsInAuction(auction.Id).Result.ToList(),
-			//	ActualPrice = auction.ActualPrice,
-			//	IsOpened = auction.IsOpened
-			//};
-
 			var model = new AuctionDetailViewModel();
 			model.Name = auction.Name;
 			var result = await AccountFacade.GetAccountAccordingToIdAsync(auction.AccountId);
@@ -101,8 +89,8 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			model.AccountFullName = result.FirstName + " " + result.LastName;
 			model.Description = auction.Description;
 			model.ClosingTime = auction.ClosingTime;
-			//var products = await ProductFacade.GetAllProductsInAuction(auction.Id);
-			//model.Products = products.ToList();
+			var products = await ProductFacade.GetAllProductsInAuction(auction.Id);
+			model.Products = products.ToList();
 			model.ActualPrice = auction.ActualPrice;
 			model.IsOpened = auction.IsOpened;
 

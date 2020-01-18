@@ -37,6 +37,21 @@
                 </div>
             }
         </div>
+        
+        <br/>
+        <h2>Products in auction: </h2>
+        <br/>
+
+        @foreach (var product in Model.Products)
+        {
+	        <div class="row">
+		        <div class="col-sm-4">
+			        <span>Product name: <strong class="text-capitalize">@product.Name</strong></span>
+		        </div>
+	        </div>
+        }
+
+
 
         <p>
             @Html.ActionLink("Back to all auctions", "Index")
