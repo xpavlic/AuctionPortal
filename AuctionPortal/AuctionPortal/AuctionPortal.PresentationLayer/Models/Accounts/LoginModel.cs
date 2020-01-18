@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DemoEshop.PresentationLayer.Models.Accounts
+namespace AuctionPortal.PresentationLayer.Models.Accounts
 {
 	public class LoginModel
 	{

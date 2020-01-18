@@ -15,7 +15,7 @@ namespace ConsoleApp
                 List<Account> accs = new List<Account>(context.Accounts);
                 foreach (var VARIABLE in accs)
                 {
-                    Console.WriteLine(VARIABLE.Id);
+                    Console.WriteLine(VARIABLE.Id +";" +  VARIABLE.IsAdministrator.ToString());
                 }
 
                 List<Product> asd = new List<Product>(context.Products);
@@ -68,10 +68,24 @@ namespace ConsoleApp
                     ProductImgUrl = "asdsd"
                 };
 
+                Account acctoun = new Account
+                {
+                    Address = "asd",
+                    BirthDate = DateTime.Today,
+                    Email = "asd@asd",
+                    FirstName = "admin",
+                    LastName = "admin",
+                    Id = new Guid("0cf65f4d-a568-481d-b73f-fdc026a75cce"),
+                    IsAdministrator = true,
+                    MobilePhoneNumber = "123",
+                    Password = "asd"
+                };
+
                 //context.Categories.Add(parent);
                 //context.Categories.Add(child);
                 ////context.Auctions.Add(auction);
                 ////context.Products.Add(product);
+                //context.Accounts.Add(acctoun);
                 //context.SaveChanges();
             }
             Console.ReadKey();
