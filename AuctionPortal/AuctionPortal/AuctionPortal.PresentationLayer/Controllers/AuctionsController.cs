@@ -72,9 +72,18 @@ namespace AuctionPortal.PresentationLayer.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create(AuctionDTO auctionDto)
-		{
-			await AuctionFacade.CreateAuctionWithCategoryNameAsync(auctionDto, "Category");
+		public async Task<ActionResult> Create(AuctionCreateViewModel auctionViewModel)
+        {
+            var account = await AccountFacade.GetAccountAccordingToEmailAsync(auctionViewModel.AccountEmail);
+            var auctionDto = new AuctionDTO()
+            {
+                ClosingTime = auctionViewModel.ClosingTime,
+                ActualPrice = auctionViewModel.ActualPrice,
+                Name = auctionViewModel.Name, 
+                Description = auctionViewModel.Description,
+				AccountId = account.Id
+            };
+			await AuctionFacade.CreateAuctionWithCategoryNameAsync(auctionDto, auctionViewModel.CategoryName);
 
 			return RedirectToAction("Index", "Home");
 		}

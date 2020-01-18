@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="Models\Accounts\LoginModel.cs" />
     <Compile Include="Models\AdminAuctions\AdminAuctionEditModel.cs" />
+    <Compile Include="Models\Auctions\AuctionCreateViewModel.cs" />
     <Compile Include="Models\Auctions\AuctionDetailViewModel.cs" />
     <Compile Include="Models\Auctions\AuctionListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
