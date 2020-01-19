@@ -28,7 +28,7 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <span>Phone Number: <strong class="text-danger">@Model.AccountDto.MobilePhoneNumber,- CZK</strong></span>
+                            <span>Phone Number: <strong class="text-danger">@Model.AccountDto.MobilePhoneNumber</strong></span>
                         </div>
                     </div>
                     <div class="row">
@@ -45,10 +45,14 @@
                 }
             </div>
 
+            <div class=" row">
+                @Html.ActionLink("Change Email", "ChangeEmail", "Account", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Change Password", "ChangePassword", "Account", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+
             <br />
             <h2>My Auctions: </h2>
             <br />
-
 
             <div class="row w-100 p-3">
                 <div class="col-lg-12">
@@ -78,19 +82,19 @@
                 <div class="col-lg-12">
                     <div class="list-group text-center">
                         @{foreach (var auction in Model.BiddingAuctionsAndLastBid)
-                        {
-                            <div class="d-flex">
-                                <div class="list-group-item list-group-item-action clickable-area" @("onclick=GoToDetail('" + auction.First.Id + "')")>
+                            {
+                                <div class="d-flex">
+                                    <div class="list-group-item list-group-item-action clickable-area" @("onclick=GoToDetail('" + auction.First.Id + "')")>
 
-                                    <div class="d-flex justify-content-between ">
-                                        <h3 class="mb-3" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="thumbnail-label">@auction.First.Name.</h3>
-                                        <h5>Closing time: @auction.First.ClosingTime.ToString("dd-MM-yyyy hh:mm")</h5>
-                                        <h5>Actual price: @auction.First.ActualPrice CZK</h5>
-                                        <h5>Last Bidding user: @auction.Second.FirstName @auction.Second.LastName</h5>
+                                        <div class="d-flex justify-content-between ">
+                                            <h3 class="mb-3" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="thumbnail-label">@auction.First.Name.</h3>
+                                            <h5>Closing time: @auction.First.ClosingTime.ToString("dd-MM-yyyy hh:mm")</h5>
+                                            <h5>Actual price: @auction.First.ActualPrice CZK</h5>
+                                            <h5>Last Bidding user: @auction.Second.FirstName @auction.Second.LastName</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        }}
+                            }}
                     </div>
                 </div>
             </div>
