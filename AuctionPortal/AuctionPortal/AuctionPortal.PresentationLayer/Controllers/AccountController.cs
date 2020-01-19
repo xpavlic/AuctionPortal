@@ -47,15 +47,15 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			catch (ArgumentException)
 			{
 				ModelState.AddModelError("Email Address", "Account with that email address already exists!");
-				return View();
+				return View(accountCreateDto);
 			}
 			catch (DbEntityValidationException)
 			{
-				return View();
+                return View();
 			}
 			catch (SqlException)
 			{
-				return View();
+                return View();
 			}
 		}
 
@@ -141,6 +141,48 @@ namespace AuctionPortal.PresentationLayer.Controllers
 				BiddingAuctionsAndLastBid = new List<Pair<AuctionDTO, AccountDTO>>(biddedAuctionsLastBidAccount)
             };
             return View("AccountDeatilView", accountDetailModel);
+        }
+
+        public async Task<ActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (model.Password == null || model.PasswordAgain == null)
+            {
+                return View(model);
+            }
+            if (model.Password == model.PasswordAgain)
+            {
+                var account = await AccountFacade.GetAccountAccordingToEmailAsync(model.Email);
+                account.Password = model.Password;
+                var result = await AccountFacade.EditAccountAsync(account);
+                return await Login(new LoginModel {EmailAddress = model.Email, Password = model.Password }, null);
+            }
+
+            ModelState.AddModelError("", "Entered Passwords aren't same");
+            return View(new ChangePasswordModel { Email = model.Email });
+		}
+
+        public async Task<ActionResult> ChangeEmail(ChangeEmailModel model)
+        {
+            if (model.NewEmail == null || model.NewEmailAgain == null)
+            {
+                return View(model);
+            }
+
+            if (model.NewEmail == model.NewEmailAgain)
+            {
+                var account = await AccountFacade.GetAccountAccordingToEmailAsync(model.Email);
+                if ((await AccountFacade.GetAccountAccordingToEmailAsync(model.NewEmail)) != null)
+                {
+                    ModelState.AddModelError("", "Account with this Email already exist");
+                    return View(new ChangeEmailModel { Email = model.Email });
+				}
+                account.Email = model.NewEmail;
+                var result = await AccountFacade.EditAccountAsync(account);
+                return await Login(new LoginModel {EmailAddress = model.NewEmail, Password = account.Password}, null);
+            }
+
+			ModelState.AddModelError("", "Entered Emails aren't same");
+            return View(new ChangeEmailModel {Email = model.Email });
         }
 	}
 }
