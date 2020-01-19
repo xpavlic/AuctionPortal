@@ -139,7 +139,7 @@ namespace AuctionPortal.BusinessLayer.Facades
                 var auctionDto = await auctionService.GetAsync(auctionId);
                 var accountDto = await accountService.GetAsync(accountId);
 
-                if (auctionDto == null || accountDto == null || !auctionDto.IsOpened)
+                if (auctionDto == null || accountDto == null)
                 {
                     return false;
                 }
@@ -160,6 +160,16 @@ namespace AuctionPortal.BusinessLayer.Facades
 
                 await uow.Commit();
                 return true;
+            }
+        }
+
+        public async Task<IEnumerable<AuctionDTO>> GetAllAuctionsForAccount(Guid accountId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var auctions = await auctionService.ListAuctionsAsync(new AuctionFilterDto {AccountId = accountId});
+                return auctions.Items;
+
             }
         }
     }

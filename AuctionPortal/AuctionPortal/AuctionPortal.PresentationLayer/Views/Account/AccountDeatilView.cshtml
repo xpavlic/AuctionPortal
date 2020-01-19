@@ -1,0 +1,111 @@
+﻿@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Common
+@model AuctionPortal.PresentationLayer.Models.Accounts.AccountDetailModel
+@{
+    ViewBag.Title = "AccountDeatilView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+    @Styles.Render("~/Content/css/tree.css")
+    @Styles.Render("~/Content/css/PagedList.css")
+    @Styles.Render("~/Content/themes/base/jquery-ui.css")
+}
+
+@using (Html.BeginForm("Details", "Account", Model, FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-sm">
+            <h3>@Html.DisplayFor(model => (model.FullName))</h3>
+
+            <div class="row top-buffer-small col-sm-12">
+                @{
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Email:  <strong class="text-danger">@Model.AccountDto.Email</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Phone Number: <strong class="text-danger">@Model.AccountDto.MobilePhoneNumber,- CZK</strong></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Address: <strong class="text-danger">@Model.AccountDto.Address</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Birth Date: <strong class="text-danger">@Model.AccountDto.BirthDate.ToString("dd-MM-yyyy hh:mm")</strong></span>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <br />
+            <h2>My Auctions: </h2>
+            <br />
+
+
+            <div class="row w-100 p-3">
+                <div class="col-lg-12">
+                    <div class="list-group text-center">
+                        @{foreach (var auction in Model.MyAuctions)
+                            {
+                                <div class="d-flex">
+                                    <div class="list-group-item list-group-item-action clickable-area" @("onclick=GoToDetail('" + auction.Id + "')")>
+
+                                        <div class="d-flex justify-content-between ">
+                                            <h3 class="mb-3" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="thumbnail-label">@auction.Name</h3>
+                                            <h5>Closing time: @auction.ClosingTime.ToString("dd-MM-yyyy hh:mm")</h5>
+                                            <h5>Actual price: @auction.ActualPrice CZK</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            }}
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <h2>Bidding Auctions: </h2>
+            <br />
+
+            <div class="row w-100 p-3">
+                <div class="col-lg-12">
+                    <div class="list-group text-center">
+                        @{foreach (var auction in Model.BiddingAuctionsAndLastBid)
+                        {
+                            <div class="d-flex">
+                                <div class="list-group-item list-group-item-action clickable-area" @("onclick=GoToDetail('" + auction.First.Id + "')")>
+
+                                    <div class="d-flex justify-content-between ">
+                                        <h3 class="mb-3" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="thumbnail-label">@auction.First.Name.</h3>
+                                        <h5>Closing time: @auction.First.ClosingTime.ToString("dd-MM-yyyy hh:mm")</h5>
+                                        <h5>Actual price: @auction.First.ActualPrice CZK</h5>
+                                        <h5>Last Bidding user: @auction.Second.FirstName @auction.Second.LastName</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function GoToDetail(id) {
+        window.location = "/Auctions/Details/" + id;
+    }
+</script>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/tree.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.js")
+    @Scripts.Render("~/Scripts/slider.js")
+}

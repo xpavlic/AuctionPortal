@@ -148,6 +148,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Accounts\AccountDetailModel.cs" />
     <Compile Include="Models\Accounts\LoginModel.cs" />
     <Compile Include="Models\AdminAuctions\AdminAuctionEditModel.cs" />
     <Compile Include="Models\Auctions\AuctionCreateViewModel.cs" />
@@ -189,6 +190,7 @@
     <Content Include="Views\AdminAuctions\Edit.cshtml" />
     <Content Include="Views\AdminAuctions\Index.cshtml" />
     <Content Include="Views\Auctions\AuctionCreateView.cshtml" />
+    <Content Include="Views\Account\AccountDeatilView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuctionPortal.BusinessLayer\AuctionPortal.BusinessLayer.csproj">
