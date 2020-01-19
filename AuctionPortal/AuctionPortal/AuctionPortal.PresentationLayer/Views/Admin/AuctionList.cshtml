@@ -1,0 +1,22 @@
+﻿@model AuctionPortal.PresentationLayer.Models.Admin.AuctionListModel
+
+@{
+    ViewBag.Title = "Auctions";
+}
+
+<h2>Auctions</h2>
+
+@foreach (var category in Model.Categories)
+{
+	<h3>@category.Name</h3>
+	foreach (var auction in Model.Auctions.Where(x => x.CategoryId == category.Id))
+	{
+		<div>
+			<div class="list-group-item">
+				<h4><strong>@auction.Name</strong>    @auction.ActualPrice CZK    @auction.ClosingTime</h4>
+				<h5>@auction.Description</h5>
+				<br />
+			</div>
+		</div>
+	}
+}
