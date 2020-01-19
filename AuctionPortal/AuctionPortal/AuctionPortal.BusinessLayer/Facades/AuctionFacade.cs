@@ -124,6 +124,14 @@ namespace AuctionPortal.BusinessLayer.Facades
             }
         }
 
+        public async Task<IEnumerable<AccountAuctionRelationDTO>> GetAllBidsAccordingToAuction(Guid auctionId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await bidService.GetAllBidsByAuction(auctionId);
+            }
+        }
+
         public async Task<bool> BidOnAuctionAsync(Guid auctionId, Guid accountId, decimal bidValue)
         {
             using (var uow = UnitOfWorkProvider.Create())
@@ -136,11 +144,18 @@ namespace AuctionPortal.BusinessLayer.Facades
                     return false;
                 }
 
+                auctionDto.ActualPrice += bidValue;
+                if (!await EditAuctionAsync(auctionDto))
+                {
+                    return false;
+                }
+
                 bidService.Create(new AccountAuctionRelationDTO
                 {
                     AuctionId = auctionId,
                     AccountId = accountId,
-                    BidValue = bidValue
+                    BidValue = bidValue,
+                    BidDateTime = DateTime.Now
                 });
 
                 await uow.Commit();

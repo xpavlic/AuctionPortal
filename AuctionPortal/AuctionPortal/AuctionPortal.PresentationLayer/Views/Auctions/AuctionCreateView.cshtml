@@ -1,5 +1,4 @@
-﻿@using AuctionPortal.DataAccessLayer.EntityFramework.Entities
-@model AuctionPortal.PresentationLayer.Models.Auctions.AuctionCreateViewModel
+﻿@model AuctionPortal.PresentationLayer.Models.Auctions.AuctionCreateViewModel
 
 @{
 	ViewBag.Title = "Create a new auction";
@@ -9,8 +8,8 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Hidden("AccountEmail", User.Identity.Name);
-	@Html.Hidden("CategoryName", "NoCategory");
+    @Html.Hidden("AccountEmail", User.Identity.Name)
+	@Html.Hidden("CategoryName", "NoCategory")
 	@Html.AntiForgeryToken()
 	<div class="form-horizontal">
 		<hr />

@@ -5,56 +5,90 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-sm">
-        <h3>@Html.DisplayFor(model => model.Name)</h3>
+@using (Html.BeginForm("CreateBid", "Auctions", Model, FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-sm">
+            <h3>@Html.DisplayFor(model => model.Name)</h3>
 
-        <div class="row text-justify top-buffer-small col-sm-12">@Html.DisplayFor(model => model.Description)</div>
-        <br />
-        <div class="row top-buffer-small col-sm-12">
-            @{
-                <div class="row">
-                    <div class="col-sm-4">
-                        <span>Opened <strong class="text-danger">@Model.IsOpened.ToString()</strong></span>
+            <div class="row text-justify top-buffer-small col-sm-12">@Html.DisplayFor(model => model.Description)</div>
+            <br/>
+            <div class="row top-buffer-small col-sm-12">
+                @{
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Opened <strong class="text-danger">@Model.IsOpened.ToString()</strong></span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-sm-4">
-                        <span>Actual price: <strong class="text-danger">@Model.ActualPrice.ToString("N2"),- CZK</strong></span>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Actual price: <strong class="text-danger">@Model.ActualPrice.ToString("N2"),- CZK</strong></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <span>Closing time: <strong class="text-danger">@Model.ClosingTime.ToString("dd-MM-yyyy hh:mm")</strong></span>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Closing time: <strong class="text-danger">@Model.ClosingTime.ToString("dd-MM-yyyy hh:mm")</strong></span>
+                        </div>
                     </div>
-                </div>
 
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>Auction owner: <strong class="text-danger">@Model.AccountFullName</strong></span>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group row">
+                @Html.LabelFor(model => model.NewBidValue, htmlAttributes: new {@class = "col-form-label col-md-2"}, labelText: "Bid Value")
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NewBidValue, new {htmlAttributes = new {@class = "form-control"}})
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="CreateBid" class="btn btn-default"/>
+                </div>
+            </div>
+
+            <br/>
+            <h2>Products in auction: </h2>
+            <br/>
+
+            @foreach (var product in Model.Products)
+            {
                 <div class="row">
                     <div class="col-sm-4">
-                        <span>Auction owner: <strong class="text-danger">@Model.AccountFullName</strong></span>
+                        <span>Product name: <strong class="text-capitalize">@product.Name</strong></span>
                     </div>
                 </div>
             }
+
+            <br/>
+            <h2>Auction Bids: </h2>
+            <br/>
+
+            @foreach (var bid in Model.Bids)
+            {
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span>Name: <strong class="text-capitalize">@bid.Second.FirstName @bid.Second.LastName</strong></span>
+                        <span>Email: <strong class="text-capitalize">@bid.Second.Email</strong></span>
+                        <span>BidValue: <strong class="text-capitalize">@bid.First.BidValue</strong></span>
+                        <span>BidDateTime: <strong class="text-capitalize">@bid.First.BidDateTime</strong></span>
+
+                    </div>
+                </div>
+            }
+
+            @Html.Hidden("EmailOfBidAccount", User.Identity.Name)
+
+            <p>
+                @Html.ActionLink("Back to all auctions", "Index")
+            </p>
         </div>
-        
-        <br/>
-        <h2>Products in auction: </h2>
-        <br/>
-
-        @foreach (var product in Model.Products)
-        {
-	        <div class="row">
-		        <div class="col-sm-4">
-			        <span>Product name: <strong class="text-capitalize">@product.Name</strong></span>
-		        </div>
-	        </div>
-        }
-
-
-
-        <p>
-            @Html.ActionLink("Back to all auctions", "Index")
-        </p>
     </div>
-</div>
+}
