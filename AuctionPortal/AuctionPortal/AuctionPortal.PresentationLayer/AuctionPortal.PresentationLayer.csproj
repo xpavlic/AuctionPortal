@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Accounts\AccountDetailModel.cs" />
     <Compile Include="Models\Accounts\LoginModel.cs" />
     <Compile Include="Models\Admin\AccountListModel.cs" />
     <Compile Include="Models\Admin\AuctionListModel.cs" />
@@ -184,6 +185,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\Auctions\AuctionCreateView.cshtml" />
+    <Content Include="Views\Account\AccountDeatilView.cshtml" />
     <Content Include="Views\Admin\AccountList.cshtml" />
     <Content Include="Views\Admin\AuctionList.cshtml" />
     <Content Include="Views\Admin\AccountEdit.cshtml" />
