@@ -82,7 +82,8 @@ namespace AuctionPortal.PresentationLayer.Controllers
                 ActualPrice = auctionViewModel.ActualPrice,
                 Name = auctionViewModel.Name, 
                 Description = auctionViewModel.Description,
-				AccountId = account.Id
+				AccountId = account.Id,
+				IsOpened = true
             };
 			await AuctionFacade.CreateAuctionWithCategoryNameAsync(auctionDto, auctionViewModel.CategoryName);
 
