@@ -1,21 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
+using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
 using AuctionPortal.BusinessLayer.Facades;
 using AuctionPortal.BusinessLayer.Services.Accounts;
 using AuctionPortal.PresentationLayer.Models.Accounts;
+using Castle.Core;
 
 namespace AuctionPortal.PresentationLayer.Controllers
 {
 	public class AccountController : Controller
 	{
 		public AccountFacade AccountFacade { get; set; }
+		public AuctionFacade AuctionFacade { get; set; }
 
 		public ActionResult Register()
 		{
@@ -97,5 +103,44 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			FormsAuthentication.SignOut();
 			return RedirectToAction("Index", "Home");
 		}
+
+        public async Task<ActionResult> Details(string email)
+        {
+            var account = await AccountFacade.GetAccountAccordingToEmailAsync(email);
+            var myAuctions = (await AuctionFacade.GetAllAuctionsForAccount(account.Id)).ToList();
+            var allMyBids = (await AccountFacade.GetAllBidsAccordingToAccount(account.Id)).ToList();
+            var biddedAuctions = new List<AuctionDTO>();
+            foreach (var auction in allMyBids)
+            {
+                biddedAuctions.Add(await AuctionFacade.GetAuctionAsync(auction.AuctionId));
+            }
+			biddedAuctions = biddedAuctions.Distinct().ToList();
+
+            var biddedAuctionsLastBidAccount = new List<Pair<AuctionDTO, AccountDTO>>();
+
+            foreach (var auction in biddedAuctions)
+            {
+                biddedAuctionsLastBidAccount.Add(new Pair<AuctionDTO, AccountDTO>(auction, await AccountFacade.GetAccountAccordingToIdAsync(
+                    (await AuctionFacade.GetAllBidsAccordingToAuction(auction.Id)).OrderByDescending(x => x.BidDateTime)
+                    .First().AccountId)));
+            }
+
+            /*var asd = biddedAuctions
+                .Distinct().Select(async x =>
+                {
+                    return new Pair<AuctionDTO, AccountDTO>(x,
+                            await AccountFacade.GetAccountAccordingToIdAsync(
+                                (await AuctionFacade.GetAllBidsAccordingToAuction(x.Id))
+                                .OrderByDescending(y => y.BidDateTime).First().AccountId));
+                }).ToList();
+				*/
+            AccountDetailModel accountDetailModel = new AccountDetailModel
+            {
+                AccountDto = account,
+				MyAuctions = myAuctions,
+				BiddingAuctionsAndLastBid = new List<Pair<AuctionDTO, AccountDTO>>(biddedAuctionsLastBidAccount)
+            };
+            return View("AccountDeatilView", accountDetailModel);
+        }
 	}
 }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Common;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
 using AuctionPortal.BusinessLayer.Facades.Common;
 using AuctionPortal.BusinessLayer.Services.Accounts;
+using AuctionPortal.BusinessLayer.Services.Bids;
 using AuctionPortal.Infrastructure.UnitOfWork;
 
 namespace AuctionPortal.BusinessLayer.Facades
@@ -12,10 +14,12 @@ namespace AuctionPortal.BusinessLayer.Facades
     public class AccountFacade : FacadeBase
     {
         private readonly IAccountService accountService;
+        private readonly IBidService bidService;
 
-        public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService) : base(unitOfWorkProvider)
+        public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService, IBidService bidService) : base(unitOfWorkProvider)
         {
             this.accountService = accountService;
+            this.bidService = bidService;
         }
 
         public async Task<AccountDTO> GetAccountAccordingToIdAsync(Guid id)
@@ -93,6 +97,14 @@ namespace AuctionPortal.BusinessLayer.Facades
                 accountService.Delete(id);
                 await uow.Commit();
                 return true;
+            }
+        }
+
+        public async Task<IEnumerable<AccountAuctionRelationDTO>> GetAllBidsAccordingToAccount(Guid accountId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await bidService.GetAllBidsByAccount(accountId);
             }
         }
     }
