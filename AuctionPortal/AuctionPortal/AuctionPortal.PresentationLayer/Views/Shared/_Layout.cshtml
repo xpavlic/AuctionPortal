@@ -42,7 +42,7 @@
 						if (Request.IsAuthenticated)
 						{
 							<li>@Html.ActionLink("Create a new auction", "Create", "Auctions")</li>
-              <li>@Html.ActionLink("AccountDetails", "Details", "Account", new {email = User.Identity.Name}, null)</li>
+                            <li>@Html.ActionLink("AccountDetails", "Details", "Account", new {email = User.Identity.Name}, null)</li>
 						}
 						<li>@Html.ActionLink("About", "About", "Home")</li>
 						<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
