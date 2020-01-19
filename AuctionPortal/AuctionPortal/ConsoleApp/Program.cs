@@ -13,6 +13,11 @@ namespace ConsoleApp
             using (var context = new AuctionPortalDbContext())
             {
                 List<Account> accs = new List<Account>(context.Accounts);
+                List<AccountAuctionRelation> relations = new List<AccountAuctionRelation>(context.AccountAuctionRelations);
+                foreach (var VARIABLE in relations)
+                {
+                    Console.WriteLine(VARIABLE.Id + ";" + VARIABLE.AccountId.ToString() + "; " + VARIABLE.AuctionId);
+                }
                 foreach (var VARIABLE in accs)
                 {
                     Console.WriteLine(VARIABLE.Id +";" +  VARIABLE.IsAdministrator.ToString());
@@ -83,8 +88,8 @@ namespace ConsoleApp
 
                 //context.Categories.Add(parent);
                 //context.Categories.Add(child);
-                ////context.Auctions.Add(auction);
-                ////context.Products.Add(product);
+                //context.Auctions.Add(auction);
+                //context.Products.Add(product);
                 //context.Accounts.Add(acctoun);
                 //context.SaveChanges();
             }

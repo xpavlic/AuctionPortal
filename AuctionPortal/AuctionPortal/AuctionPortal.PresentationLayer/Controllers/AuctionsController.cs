@@ -8,6 +8,7 @@ using AuctionPortal.BusinessLayer.DataTransferObjects.Common;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Filters;
 using AuctionPortal.BusinessLayer.Facades;
 using AuctionPortal.PresentationLayer.Models.Auctions;
+using Castle.Core;
 using X.PagedList;
 
 namespace AuctionPortal.PresentationLayer.Controllers
@@ -90,11 +91,15 @@ namespace AuctionPortal.PresentationLayer.Controllers
 
 		private async Task<AuctionDetailViewModel> InitializeAuctionDetailViewModel(AuctionDTO auction)
 		{
-			var model = new AuctionDetailViewModel();
-			model.Name = auction.Name;
-			var result = await AccountFacade.GetAccountAccordingToIdAsync(auction.AccountId);
+            var model = new AuctionDetailViewModel {Name = auction.Name};
+            var result = await AccountFacade.GetAccountAccordingToIdAsync(auction.AccountId);
 
-
+			model.Bids = new List<Pair<AccountAuctionRelationDTO, AccountDTO>>();
+            var bidsList = (await AuctionFacade.GetAllBidsAccordingToAuction(auction.Id)).ToList().OrderBy(x => x.BidDateTime);
+            foreach (var bid in bidsList)
+            {
+                model.Bids.Add(new Pair<AccountAuctionRelationDTO, AccountDTO>(bid, await AccountFacade.GetAccountAccordingToIdAsync(bid.AccountId)));
+            }
 			model.AccountFullName = result.FirstName + " " + result.LastName;
 			model.Description = auction.Description;
 			model.ClosingTime = auction.ClosingTime;
@@ -102,9 +107,18 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			model.Products = products.ToList();
 			model.ActualPrice = auction.ActualPrice;
 			model.IsOpened = auction.IsOpened;
+            model.Id = auction.Id;
 
 			return model;
 		}
+
+        [HttpPost]
+		public async Task<ActionResult> CreateBid(AuctionDetailViewModel auctionModel)
+        {
+            var accountDto = await AccountFacade.GetAccountAccordingToEmailAsync(auctionModel.EmailOfBidAccount);
+            var result = await AuctionFacade.BidOnAuctionAsync(auctionModel.Id, accountDto.Id, auctionModel.NewBidValue);
+            return await Details(auctionModel.Id);
+        }
 
 		private async Task<AuctionListViewModel> InitializeAuctionListViewModel(QueryResultDto<AuctionDTO, AuctionFilterDto> result, int totalItemsCount, IList<CategoryDTO> categories = null)
 		{
@@ -128,5 +142,6 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			}
 			return selectedCategoryIds.ToArray();
 		}
-	}
+
+    }
 }

@@ -24,5 +24,7 @@ namespace AuctionPortal.DataAccessLayer.EntityFramework.Entities
 		public virtual Auction Auction { get; set; }
 
         public decimal BidValue { get; set; }
+
+		public DateTime BidDateTime { get; set; }
 	}
 }

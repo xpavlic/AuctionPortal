@@ -12,6 +12,8 @@ namespace AuctionPortal.BusinessLayer.DataTransferObjects
 
         public decimal BidValue { get; set; }
 
+        public DateTime BidDateTime { get; set; }
+
         public override bool Equals(object obj)
         {
             return obj is AccountAuctionRelationDTO dTO &&
