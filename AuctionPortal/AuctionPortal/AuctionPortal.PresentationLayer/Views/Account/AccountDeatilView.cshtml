@@ -1,6 +1,4 @@
-﻿@using X.PagedList.Mvc
-@using X.PagedList.Mvc.Common
-@model AuctionPortal.PresentationLayer.Models.Accounts.AccountDetailModel
+﻿@model AuctionPortal.PresentationLayer.Models.Accounts.AccountDetailModel
 @{
     ViewBag.Title = "AccountDeatilView";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -39,7 +37,7 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <span>Birth Date: <strong class="text-danger">@Model.AccountDto.BirthDate.ToString("dd-MM-yyyy hh:mm")</strong></span>
+                            <span>Birth Date: <strong class="text-danger">@Model.AccountDto.BirthDate.ToString("dd-MM-yyyy")</strong></span>
                         </div>
                     </div>
                 }
@@ -64,7 +62,7 @@
 
                                         <div class="d-flex justify-content-between ">
                                             <h3 class="mb-3" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="thumbnail-label">@auction.Name</h3>
-                                            <h5>Closing time: @auction.ClosingTime.ToString("dd-MM-yyyy hh:mm")</h5>
+                                            <h5>Closing date: @auction.ClosingTime.ToString("dd-MM-yyyy")</h5>
                                             <h5>Actual price: @auction.ActualPrice CZK</h5>
                                         </div>
                                     </div>
@@ -88,7 +86,7 @@
 
                                         <div class="d-flex justify-content-between ">
                                             <h3 class="mb-3" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="thumbnail-label">@auction.First.Name.</h3>
-                                            <h5>Closing time: @auction.First.ClosingTime.ToString("dd-MM-yyyy hh:mm")</h5>
+                                            <h5>Closing date: @auction.First.ClosingTime.ToString("dd-MM-yyyy")</h5>
                                             <h5>Actual price: @auction.First.ActualPrice CZK</h5>
                                             <h5>Last Bidding user: @auction.Second.FirstName @auction.Second.LastName</h5>
                                         </div>

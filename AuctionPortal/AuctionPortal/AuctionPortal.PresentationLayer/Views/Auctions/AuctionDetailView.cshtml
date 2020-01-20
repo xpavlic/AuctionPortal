@@ -18,7 +18,7 @@
                 @{
                     <div class="row">
                         <div class="col-sm-4">
-                            <span>Opened <strong class="text-danger">@Model.IsOpened.ToString()</strong></span>
+                            <span>Opened <strong class="text-danger">@Model.IsOpenedStr</strong></span>
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <span>Closing time: <strong class="text-danger">@Model.ClosingTime.ToString("dd-MM-yyyy hh:mm")</strong></span>
+                            <span>Closing Date: <strong class="text-danger">@Model.ClosingTime.ToString("dd-MM-yyyy")</strong></span>
                         </div>
                     </div>
 
@@ -41,11 +41,19 @@
                 }
 
             </div>
-            
-            @if (User.Identity.Name == Model.OwnerEmail) {
-                @Html.ActionLink("AccountDetails", "Edit", "Account", new { email = User.Identity.Name }, null)
-            }
 
+            <br />
+            <br />
+            <br />
+            <br />
+            @if (User.Identity.Name == Model.AuctionOwnerEmail || User.Identity.Name == "admin")
+            {
+                @Html.ActionLink("Edit Auction", "EditAuctionInit", "Auctions", Model, null)
+                <br />
+                @Html.ActionLink("Delete Auction", "DeleteAuction", "Auctions", Model, null)
+            }
+            <br />
+            <br />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group row">
                 @Html.LabelFor(model => model.NewBidValue, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Bid Value")

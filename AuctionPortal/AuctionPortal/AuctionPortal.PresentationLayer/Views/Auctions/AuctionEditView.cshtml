@@ -1,7 +1,52 @@
-﻿
+﻿@model AuctionPortal.PresentationLayer.Models.Auctions.AuctionDetailViewModel
 @{
     ViewBag.Title = "AuctionEditView";
 }
 
-<h2>AuctionEditView</h2>
+<h2>@Model.Name</h2>
+<h3>@Model.AccountFullName</h3>
+<br />
+@using (Html.BeginForm("EditAuction", "Auctions", Model, FormMethod.Post))
+{
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Auction Name")
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
 
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-form-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.ClosingTime, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Closing Date")
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ClosingTime, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @Html.ValidationMessageFor(model => model.ClosingTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.CategoriesSelectList, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Select Category")
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CategoryId, Model.CategoriesSelectList, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.IsOpened, htmlAttributes: new { @class = "col-form-label col-md-2" })
+        <label>
+            @Html.CheckBoxFor(model => model.IsOpened, new { htmlAttributes = new { @class = "form-control" } })
+        </label>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Edit auction" class="btn btn-default" />
+        </div>
+    </div>
+}
