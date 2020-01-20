@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Data.Common;
 using System.Data.Entity;
+using System.IO;
 using AuctionPortal.DataAccessLayer.EntityFramework.Entities;
 
 namespace AuctionPortal.DataAccessLayer.EntityFramework
 {
     public sealed class AuctionPortalDbContext : DbContext
     {
-		private const string MartinPC = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=C:\\Users\\Martin\\Desktop\\c#\\Database.mdf;Integrated Security = True;";
-		private const string School = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=J:\\pv179\\Database.mdf;Integrated Security = True;";
-        private const string HonzaPC = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=C:\\Users\\honza\\OneDrive\\Plocha\\C# Podzim\\Database.mdf;Integrated Security = True;";
-
-        private const string ConnectionString = HonzaPC;
+		//private const string MartinPC = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=C:\\Users\\Martin\\Desktop\\c#\\Database.mdf;Integrated Security = True;";
+		//private const string School = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=J:\\pv179\\Database.mdf;Integrated Security = True;";
+		//private const string HonzaPC = "Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=C:\\Users\\honza\\OneDrive\\Plocha\\C# Podzim\\Database.mdf;Integrated Security = True;";
+		//private const string ConnectionString = 
 
         /// <summary>
         /// Non-parametric ctor used by data access layer
         /// </summary>
-        public AuctionPortalDbContext() : base(ConnectionString)
+        public AuctionPortalDbContext() : base($"Data source=(LocalDB)\\MSSQLLocalDB;AttachDbFileName={AppDomain.CurrentDomain.BaseDirectory}..\\Database.mdf;Integrated Security = True;")
         {
 	        //Database.SetInitializer(new DatabaseInitializer());
         }

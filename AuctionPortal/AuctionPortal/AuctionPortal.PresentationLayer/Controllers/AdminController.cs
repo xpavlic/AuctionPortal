@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -30,6 +31,56 @@ namespace AuctionPortal.PresentationLayer.Controllers
 	        var model = await InitializeAuctionListModel(allAuctions.Items.OrderBy(x => x.Name).ToList(),
 		        allCategories.OrderBy(x => x.Name).ToList());
 	        return View(model);
+        }
+
+        public async Task<ActionResult> AccountDetail(Guid id)
+        {
+	        var result = await AccountFacade.GetAccountAccordingToIdAsync(id);
+	        var model = await InitializeAccountEditModel(result);
+	        return View("AccountEdit", model);
+        }
+
+		[HttpPost]
+        public async Task<ActionResult> EditAccount(AccountEditModel model)
+        {
+	        var account = await AccountFacade.GetAccountAccordingToIdAsync(model.AccountId);
+
+	        account.FirstName = model.FirstName;
+	        account.LastName = model.LastName;
+	        account.Email = model.Email;
+	        account.Password = model.Password;
+	        account.Address = model.Address;
+	        account.MobilePhoneNumber = model.MobilePhoneNumber;
+
+	        await AccountFacade.EditAccountAsync(account);
+			return RedirectToAction("AccountDetail", new {id = model.AccountId});
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteAccount(Guid accountId)
+        {
+	        await AccountFacade.DeleteAccountAsync(accountId);
+	        return RedirectToAction("AccountList");
+        }
+
+        private async Task<AccountEditModel> InitializeAccountEditModel(AccountDTO account)
+        {
+	        var auctions = (await AuctionFacade.GetAllAuctionsForAccount(account.Id)).OrderBy(x => x.Name).ToList();
+	        var bids = (await AccountFacade.GetAllBidsAccordingToAccount(account.Id)).OrderBy(x => x.BidDateTime).ToList();
+
+	        return new AccountEditModel
+	        {
+				FirstName = account.FirstName,
+				LastName = account.LastName,
+				Email = account.Email,
+				Password = account.Password,
+				Address = account.Address,
+				MobilePhoneNumber = account.MobilePhoneNumber,
+				BirthDate = account.BirthDate,
+				Auctions = auctions,
+				Bids = bids,
+				AccountId = account.Id
+	        };
         }
 
         private async Task<AccountListModel> InitializeAccountListModel(IList<AccountDTO> accountsList)
