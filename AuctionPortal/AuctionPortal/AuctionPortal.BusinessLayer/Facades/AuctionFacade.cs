@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using AuctionPortal.BusinessLayer.DataTransferObjects;
 using AuctionPortal.BusinessLayer.DataTransferObjects.Common;
@@ -139,7 +141,7 @@ namespace AuctionPortal.BusinessLayer.Facades
                 var auctionDto = await auctionService.GetAsync(auctionId);
                 var accountDto = await accountService.GetAsync(accountId);
 
-                if (auctionDto == null || accountDto == null)
+                if (auctionDto == null || accountDto == null || !auctionDto.IsOpened)
                 {
                     return false;
                 }
@@ -159,6 +161,7 @@ namespace AuctionPortal.BusinessLayer.Facades
                 });
 
                 await uow.Commit();
+                SendMail(auctionDto, accountDto, bidValue);
                 return true;
             }
         }
@@ -170,6 +173,34 @@ namespace AuctionPortal.BusinessLayer.Facades
                 var auctions = await auctionService.ListAuctionsAsync(new AuctionFilterDto {AccountId = accountId});
                 return auctions.Items;
 
+            }
+        }
+
+        private async Task SendMail(AuctionDTO auctionDto, AccountDTO bidAccountDto, decimal bidValue)
+        {
+            var auctOwner = await accountService.GetAccountAccordingToIdAsync(auctionDto.AccountId);
+            var fromAddress = new MailAddress("auctionportal2020@gmail.com", "AuctionPortal");
+            var toAddress = new MailAddress(auctOwner.Email, auctOwner.FirstName + " " + auctOwner.LastName);
+            const string fromPassword = "qweasdyxc";
+            const string subject = "BidOnYourAccount";
+            string body = $"{bidAccountDto.FirstName} {bidAccountDto.LastName} just bid: {bidValue} on your auction: {auctionDto.Name}";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                smtp.Send(message);
             }
         }
     }

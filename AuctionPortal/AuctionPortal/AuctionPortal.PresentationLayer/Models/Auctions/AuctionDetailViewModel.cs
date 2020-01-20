@@ -21,6 +21,8 @@ namespace AuctionPortal.PresentationLayer.Models.Auctions
 
         public string AccountFullName { get; set; }
 
+        public string OwnerEmail { get; set; }
+
         public List<ProductDTO> Products { get; set; }
 
         public List<Pair<AccountAuctionRelationDTO, AccountDTO>> Bids { get; set; }
@@ -28,5 +30,6 @@ namespace AuctionPortal.PresentationLayer.Models.Auctions
         public decimal NewBidValue { get; set; }
 
         public string EmailOfBidAccount { get; set; }
+
     }
 }

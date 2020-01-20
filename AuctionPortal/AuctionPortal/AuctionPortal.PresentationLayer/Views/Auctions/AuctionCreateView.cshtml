@@ -11,41 +11,48 @@
     @Html.Hidden("AccountEmail", User.Identity.Name)
 	@Html.Hidden("CategoryName", "NoCategory")
 	@Html.AntiForgeryToken()
-	<div class="form-horizontal">
-		<hr />
-		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		<div class="form-group row">
-			@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-md-2" })
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-			</div>
-		</div>
-
-		<div class="form-group row">
-			@Html.LabelFor(model => model.ActualPrice, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Opening price")
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.ActualPrice, new { htmlAttributes = new { @class = "form-control" } })
-			</div>
-		</div>
-
-		<div class="form-group row">
-			@Html.LabelFor(model => model.ClosingTime, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Closing time")
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.ClosingTime, new { htmlAttributes = new { @class = "form-control" } })
-			</div>
-		</div>
-
-		<div class="form-group row">
-			@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-form-label col-md-2" })
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-			</div>
-		</div>
-
-		<div class="form-group row">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Create" class="btn btn-default" />
-			</div>
+<div class="form-horizontal">
+	<hr />
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	<div class="form-group row">
+		@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
 		</div>
 	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.ActualPrice, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Opening price")
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.ActualPrice, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.ClosingTime, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Closing time")
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.ClosingTime, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-form-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.CategoriesSelectList, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Select Category")
+		<div class="col-md-10">
+			@Html.DropDownListFor(model => model.CategoryId , Model.CategoriesSelectList)
+		</div>
+    </div>
+
+	<div class="form-group row">
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" value="Create" class="btn btn-default" />
+		</div>
+	</div>
+</div>
 }

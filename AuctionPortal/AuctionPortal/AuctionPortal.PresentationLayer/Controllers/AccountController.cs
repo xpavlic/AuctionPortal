@@ -47,7 +47,7 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			catch (ArgumentException)
 			{
 				ModelState.AddModelError("Email Address", "Account with that email address already exists!");
-				return View(accountCreateDto);
+				return View();
 			}
 			catch (DbEntityValidationException)
 			{

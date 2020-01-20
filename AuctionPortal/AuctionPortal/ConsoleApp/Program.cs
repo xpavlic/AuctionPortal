@@ -87,11 +87,11 @@ namespace ConsoleApp
                 };
 
                 //context.Categories.Add(parent);
-                context.Categories.Add(child);
+                //context.Categories.Add(child);
                 //context.Auctions.Add(auction);
                 //context.Products.Add(product);
-                context.Accounts.Add(acctoun);
-                context.SaveChanges();
+                //context.Accounts.Add(acctoun);
+                //context.SaveChanges();
             }
             Console.ReadKey();
         }

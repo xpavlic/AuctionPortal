@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AuctionPortal.PresentationLayer.Models.Auctions
 {
@@ -21,6 +22,8 @@ namespace AuctionPortal.PresentationLayer.Models.Auctions
 
         public string AccountEmail { get; set; }
 
-        public string CategoryName { get; set; }
+        public string CategoryId { get; set; }
+
+        public List<SelectListItem> CategoriesSelectList { get; set; }
     }
 }

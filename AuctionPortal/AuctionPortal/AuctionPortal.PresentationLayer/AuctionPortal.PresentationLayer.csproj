@@ -194,6 +194,7 @@
     <Content Include="Views\Admin\AuctionEdit.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
+    <Content Include="Views\Auctions\AuctionEditView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuctionPortal.BusinessLayer\AuctionPortal.BusinessLayer.csproj">

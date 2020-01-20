@@ -32,9 +32,7 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			//TODO: This is soo much inefficient, why and how could we solve this?
 			var allAuctions = await AuctionFacade.GetAllAuctionsAsync(new AuctionFilterDto());
 			var result = await AuctionFacade.GetAllAuctionsAsync(filter);
-
-			var categoryTrees = Session[CategoryTreesSessionKey] as IList<CategoryDTO>;
-			var model = await InitializeAuctionListViewModel(result, (int)allAuctions.TotalItemsCount, categoryTrees);
+            var model = await InitializeAuctionListViewModel(result, result.Items, (int)allAuctions.TotalItemsCount);
 			return View("AuctionListView", model);
 		}
 
@@ -42,14 +40,12 @@ namespace AuctionPortal.PresentationLayer.Controllers
 		public async Task<ActionResult> Index(AuctionListViewModel model)
 		{
 			model.Filter.PageSize = PageSize;
-			model.Filter.CategoryIds = ProcessCategoryIds(model);
-			Session[FilterSessionKey] = model.Filter;
-			Session[CategoryTreesSessionKey] = model.Categories;
+            Session[FilterSessionKey] = model.Filter;
 
-			//TODO: This is soo much inefficient, why and how could we solve this?
 			var allAuctions = await AuctionFacade.GetAllAuctionsAsync(new AuctionFilterDto());
-			var result = await AuctionFacade.GetAllAuctionsAsync(model.Filter);
-			var newModel = await InitializeAuctionListViewModel(result, (int)allAuctions.TotalItemsCount, model.Categories);
+			var result = (await AuctionFacade.GetAllAuctionsAsync(model.Filter));
+            var filteredAuctions = model.CategoryId != null ? result.Items.Where(x => x.CategoryId == new Guid(model.CategoryId)) : result.Items;
+			var newModel = await InitializeAuctionListViewModel(result, filteredAuctions, (int)allAuctions.TotalItemsCount);
 			return View("AuctionListView", newModel);
 		}
 
@@ -67,15 +63,23 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			return View("AuctionDetailView", model);
 		}
 
-		public ActionResult Create()
-		{
-			return View("AuctionCreateView");
+		public async Task<ActionResult> Create()
+        {
+            var categories = await AuctionFacade.GetAllCategories();
+			var model = new AuctionCreateViewModel();
+			model.CategoriesSelectList = new List<SelectListItem>();
+            foreach (var category in categories)
+            {
+                model.CategoriesSelectList.Add(new SelectListItem { Text=category.Name, Value=category.Id.ToString()});
+            }
+			return View("AuctionCreateView", model);
 		}
 
 		[HttpPost]
 		public async Task<ActionResult> Create(AuctionCreateViewModel auctionViewModel)
         {
             var account = await AccountFacade.GetAccountAccordingToEmailAsync(auctionViewModel.AccountEmail);
+            var category = await AuctionFacade.GetCategoryAsync(new Guid(auctionViewModel.CategoryId));
             var auctionDto = new AuctionDTO()
             {
                 ClosingTime = auctionViewModel.ClosingTime,
@@ -85,7 +89,7 @@ namespace AuctionPortal.PresentationLayer.Controllers
 				AccountId = account.Id,
 				IsOpened = true
             };
-			await AuctionFacade.CreateAuctionWithCategoryNameAsync(auctionDto, auctionViewModel.CategoryName);
+            await AuctionFacade.CreateAuctionWithCategoryNameAsync(auctionDto, category.Name);
 
 			return RedirectToAction("Index", "Home");
 		}
@@ -121,28 +125,19 @@ namespace AuctionPortal.PresentationLayer.Controllers
             return await Details(auctionModel.Id);
         }
 
-		private async Task<AuctionListViewModel> InitializeAuctionListViewModel(QueryResultDto<AuctionDTO, AuctionFilterDto> result, int totalItemsCount, IList<CategoryDTO> categories = null)
+		private async Task<AuctionListViewModel> InitializeAuctionListViewModel(QueryResultDto<AuctionDTO, AuctionFilterDto> result, IEnumerable<AuctionDTO> filteredAuctions, int totalItemsCount)
 		{
 			return new AuctionListViewModel
 			{
-				Auctions = new StaticPagedList<AuctionDTO>(result.Items, result.RequestedPageNumber ?? 1, PageSize, totalItemsCount),
-				Categories = categories ?? await AuctionFacade.GetAllCategories() as IList<CategoryDTO>,
-				Filter = result.Filter
+				Auctions = new StaticPagedList<AuctionDTO>(filteredAuctions, result.RequestedPageNumber ?? 1, PageSize, totalItemsCount),
+                Filter = result.Filter,
+				CategoriesSelectList = new List<SelectListItem>((await AuctionFacade.GetAllCategories()).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString()}))
 			};
 		}
 
-		private static Guid[] ProcessCategoryIds(AuctionListViewModel model)
-		{
-			var selectedCategoryIds = new List<Guid>();
-			foreach (var categoryTreeRoot in model.Categories)
-			{
-				selectedCategoryIds.Add(categoryTreeRoot.Id);
-				selectedCategoryIds.AddRange(model.Categories
-					.Where(node => node.ParentId == categoryTreeRoot.Id)
-					.Select(node => node.Id));
-			}
-			return selectedCategoryIds.ToArray();
-		}
-
+        public async Task<ActionResult> EditAuction(AuctionDetailViewModel auctionModel)
+        {
+            return View("AuctionDetailView", auctionModel);
+        }
     }
 }

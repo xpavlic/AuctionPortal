@@ -11,12 +11,14 @@ namespace AuctionPortal.PresentationLayer.Models.Auctions
 		public string[] AuctionSortCriteria => new[]
 			{nameof(AuctionDTO.Name), nameof(AuctionDTO.ActualPrice), nameof(AuctionDTO.ClosingTime)};
 
-		public IList<CategoryDTO> Categories { get; set; }
-
-		public IPagedList<AuctionDTO> Auctions { get; set; }
+        public IPagedList<AuctionDTO> Auctions { get; set; }
 
 		public AuctionFilterDto Filter { get; set; }
 
 		public SelectList AllSortCriteria => new SelectList(AuctionSortCriteria);
+
+        public List<SelectListItem> CategoriesSelectList { get; set; }
+
+		public string CategoryId { get; set; }
 	}
 }
