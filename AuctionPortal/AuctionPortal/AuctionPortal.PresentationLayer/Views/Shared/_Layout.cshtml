@@ -16,65 +16,62 @@
 <body>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<div class="container">
+		<div class="navbar-header">
+			@*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>*@
-                @Html.ActionLink("Auction Portal", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					@if (User.Identity.Name == "admin")
-					{
-						<li>@Html.ActionLink("Accounts management", "AccountList", "Admin")</li>
-						<li>@Html.ActionLink("Auctions management", "AuctionList", "Admin")</li>
-					}
-					else
-					{
-						<li>@Html.ActionLink("Auctions", "Index", "Auctions")</li>
+			@Html.ActionLink("Auction Portal", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				@if (User.Identity.Name == "admin")
+				{
+					<li>@Html.ActionLink("Accounts management", "AccountList", "Admin")</li>
+					<li>@Html.ActionLink("Auctions management", "AuctionList", "Admin")</li>
+				}
+				<li>@Html.ActionLink("Auctions", "Index", "Auctions")</li>
 
-						@*FormsAuthentication.Decrypt(Context.Request.Cookies[FormsAuthentication.FormsCookieName]?.Value ?? throw new InvalidOperationException())?.UserData == "True"*@
+				@*FormsAuthentication.Decrypt(Context.Request.Cookies[FormsAuthentication.FormsCookieName]?.Value ?? throw new InvalidOperationException())?.UserData == "True"*@
 
+				@if (Request.IsAuthenticated)
+				{
+					<li>@Html.ActionLink("Create a new auction", "Create", "Auctions")</li>
+				}
+				<li>@Html.ActionLink("About", "About", "Home")</li>
+				<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-						if (Request.IsAuthenticated)
-						{
-							<li>@Html.ActionLink("Create a new auction", "Create", "Auctions")</li>
-                            <li>@Html.ActionLink("AccountDetails", "Details", "Account", new {email = User.Identity.Name}, null)</li>
-						}
-						<li>@Html.ActionLink("About", "About", "Home")</li>
-						<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-					}
-
-					@if (Request.IsAuthenticated)
-					{
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"> @User.Identity.Name.Split('@')[0] <b class="caret"></b></a>
-							<div class="dropdown-menu">
-								<div class="dropdown-header">Account management</div>
-								<div class="divider"></div>
-								@Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "dropdown-item" })
-							</div>
-						</li>
-					}
-					else
-					{
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"><b class="caret"></b></a>
-							<div class="dropdown-menu">
-								@Html.ActionLink("Register", "Register", "Account", null, new { @style = "color:black;" })
-								<div class="divider"></div>
-								@Html.ActionLink("Log in", "Login", "Account", null, new { @style = "color:black;" })
-							</div>
-						</li>
-					}
-				</ul>
-            </div>
-        </div>
-    </div>
+				@if (Request.IsAuthenticated)
+				{
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"> @User.Identity.Name.Split('@')[0] <b class="caret"></b></a>
+						<div class="dropdown-menu">
+							<div class="dropdown-header">Account management</div>
+							<div class="divider"></div>
+							@Html.ActionLink("Account details", "Details", "Account", new { email = User.Identity.Name }, null)
+							<div class="divider"></div>
+							@Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "dropdown-item" })
+						</div>
+					</li>
+				}
+				else
+				{
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"><b class="caret"></b></a>
+						<div class="dropdown-menu">
+							@Html.ActionLink("Register", "Register", "Account", null, new { @style = "color:black;" })
+							<div class="divider"></div>
+							@Html.ActionLink("Log in", "Login", "Account", null, new { @style = "color:black;" })
+						</div>
+					</li>
+				}
+			</ul>
+		</div>
+	</div>
 </div>
+
 <div class="container body-content">
     @RenderBody()
     <hr/>
