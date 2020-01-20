@@ -125,15 +125,7 @@ namespace AuctionPortal.PresentationLayer.Controllers
                     .First().AccountId)));
             }
 
-            /*var asd = biddedAuctions
-                .Distinct().Select(async x =>
-                {
-                    return new Pair<AuctionDTO, AccountDTO>(x,
-                            await AccountFacade.GetAccountAccordingToIdAsync(
-                                (await AuctionFacade.GetAllBidsAccordingToAuction(x.Id))
-                                .OrderByDescending(y => y.BidDateTime).First().AccountId));
-                }).ToList();
-				*/
+            
             AccountDetailModel accountDetailModel = new AccountDetailModel
             {
                 AccountDto = account,

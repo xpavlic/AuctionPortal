@@ -151,6 +151,7 @@
     <Compile Include="Models\Accounts\ChangeEmailModel.cs" />
     <Compile Include="Models\Accounts\ChangePasswordModel.cs" />
     <Compile Include="Models\Accounts\LoginModel.cs" />
+    <Compile Include="Models\Admin\AccountEditModel.cs" />
     <Compile Include="Models\Admin\AccountListModel.cs" />
     <Compile Include="Models\Admin\AuctionListModel.cs" />
     <Compile Include="Models\Auctions\AuctionCreateViewModel.cs" />

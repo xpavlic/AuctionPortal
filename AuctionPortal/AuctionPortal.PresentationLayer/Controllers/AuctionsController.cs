@@ -113,6 +113,15 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			model.ActualPrice = auction.ActualPrice;
 			model.IsOpened = auction.IsOpened;
             model.Id = auction.Id;
+            model.AuctionOwnerEmail = result.Email;
+            model.CategoryId = auction.CategoryId.ToString();
+            var categories = await AuctionFacade.GetAllCategories();
+            model.CategoriesSelectList = new List<SelectListItem>();
+            foreach (var category in categories)
+            {
+                model.CategoriesSelectList.Add(new SelectListItem { Text = category.Name, Value = category.Id.ToString() });
+            }
+
 
 			return model;
 		}
@@ -135,9 +144,30 @@ namespace AuctionPortal.PresentationLayer.Controllers
 			};
 		}
 
+        public async Task<ActionResult> EditAuctionInit(AuctionDetailViewModel auctionModel)
+        {
+            var result = await AuctionFacade.GetAuctionAsync(auctionModel.Id);
+            var model = await InitializeAuctionDetailViewModel(result);
+			return View("AuctionEditView", model);
+        }
+
         public async Task<ActionResult> EditAuction(AuctionDetailViewModel auctionModel)
         {
-            return View("AuctionDetailView", auctionModel);
+            var auctionDto = await AuctionFacade.GetAuctionAsync(auctionModel.Id);
+            auctionDto.CategoryId = new Guid(auctionModel.CategoryId);
+            auctionDto.IsOpened = auctionModel.IsOpened;
+            auctionDto.ClosingTime = auctionModel.ClosingTime;
+            auctionDto.Description = auctionModel.Description;
+            await AuctionFacade.EditAuctionAsync(auctionDto);
+            auctionDto = await AuctionFacade.GetAuctionAsync(auctionModel.Id);
+            auctionModel = await InitializeAuctionDetailViewModel(auctionDto);
+			return View("AuctionDetailView", auctionModel);
+        }
+
+        public async Task<ActionResult> DeleteAuction(AuctionDetailViewModel model)
+        {
+            await AuctionFacade.DeleteAuctionAsync(model.Id);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

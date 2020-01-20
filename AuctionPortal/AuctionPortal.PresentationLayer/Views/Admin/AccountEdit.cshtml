@@ -1,0 +1,111 @@
+﻿@model AuctionPortal.PresentationLayer.Models.Admin.AccountEditModel
+
+@{
+	ViewBag.Title = "Account edit";
+}
+
+<h2>@Model.FirstName @Model.LastName's account edit</h2>
+<br />
+@using (Html.BeginForm("EditAccount", "Admin", Model, FormMethod.Post))
+{
+	<div class="form-group row">
+		@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "First name")
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Last name")
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-form-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-form-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-form-label col-md-2" })
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.MobilePhoneNumber, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "Phone number")
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.MobilePhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" value="Edit account" class="btn btn-default" />
+		</div>
+	</div>
+
+	<br />
+	<h2>@Model.FirstName @Model.LastName's auctions:</h2>
+	<br />
+
+	<div class="row w-100 p-3">
+		<div class="col-lg-12">
+			<div class="list-group text-center">
+				@{foreach (var auction in Model.Auctions)
+					{
+						<div class="d-flex">
+							<div class="list-group-item list-group-item-action clickable-area" @("onclick=GoToDetail('" + auction.Id + "')")>
+
+								<div class="d-flex justify-content-between ">
+									<h3 class="mb-3" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="thumbnail-label">@auction.Name</h3>
+									<h5>Closing time: @auction.ClosingTime.ToString("dd-MM-yyyy hh:mm")</h5>
+									<h5>Actual price: @auction.ActualPrice CZK</h5>
+								</div>
+							</div>
+						</div>
+					}}
+			</div>
+		</div>
+	</div>
+
+	<br />
+	<h2>@Model.FirstName @Model.LastName's bids:</h2>
+	<br />
+
+	<div class="row w-100 p-3">
+		<div class="col-lg-12">
+			<div class="list-group text-center">
+				@{foreach (var bid in Model.Bids)
+					{
+						<div class="d-flex">
+							<div class="list-group-item list-group-item-action clickable-area" @("onclick=GoToDetail('" + bid.AuctionId + "')")>
+								<div class="d-flex justify-content-between ">
+									<h5>Bid time: @bid.BidDateTime.ToString("dd-MM-yyyy hh:mm")</h5>
+									<h5>Bid value: @bid.BidValue CZK</h5>
+								</div>
+							</div>
+						</div>
+					}}
+			</div>
+		</div>
+	</div>
+}
+
+
+<script>
+	function GoToDetail(id) {
+		window.location = "/Admin/AccountDetail/" + id;
+	}
+</script>
