@@ -23,8 +23,8 @@ namespace AuctionPortal.BusinessLayer.Facades
         private readonly IAccountService accountService;
         private readonly IBidService bidService;
 
-        public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService auctionService, ICategoryService categoryService, 
-            IAccountService accountService, IBidService bidService) 
+        public AuctionFacade(IUnitOfWorkProvider unitOfWorkProvider, IAuctionService auctionService, ICategoryService categoryService,
+            IAccountService accountService, IBidService bidService)
             : base(unitOfWorkProvider)
         {
             this.auctionService = auctionService;
@@ -37,12 +37,12 @@ namespace AuctionPortal.BusinessLayer.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-				if (filter.CategoryIds == null && filter.CategoryNames != null)
-				{
-					filter.CategoryIds = await categoryService.GetCategoryIdsByNamesAsync(filter.CategoryNames);
-				}
-				return await auctionService.ListAuctionsAsync(filter);
-			}
+                if (filter.CategoryIds == null && filter.CategoryNames != null)
+                {
+                    filter.CategoryIds = await categoryService.GetCategoryIdsByNamesAsync(filter.CategoryNames);
+                }
+                return await auctionService.ListAuctionsAsync(filter);
+            }
         }
 
         public async Task<AuctionDTO> GetAuctionAsync(Guid id)
@@ -170,9 +170,29 @@ namespace AuctionPortal.BusinessLayer.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                var auctions = await auctionService.ListAuctionsAsync(new AuctionFilterDto {AccountId = accountId});
+                var auctions = await auctionService.ListAuctionsAsync(new AuctionFilterDto { AccountId = accountId });
                 return auctions.Items;
 
+            }
+        }
+
+        public async Task<Guid> CreateCategory(CategoryDTO category)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                var id = categoryService.Create(category);
+                await uow.Commit();
+
+                return id;
+            }
+        }
+
+        public async Task DeleteCategory(Guid categoryId)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                categoryService.Delete(categoryId);
+                await uow.Commit();
             }
         }
 

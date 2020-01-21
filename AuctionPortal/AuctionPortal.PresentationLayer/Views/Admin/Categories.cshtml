@@ -1,0 +1,40 @@
+﻿@model AuctionPortal.PresentationLayer.Models.Admin.CategoriesModel
+@{
+	ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+<br />
+@using (Html.BeginForm("CreateCategory", "Admin", Model, FormMethod.Post))
+{
+	<h4>Create a new category:</h4>
+	<div class="form-group row">
+		@Html.LabelFor(model => model.NewCategoryName, htmlAttributes: new { @class = "col-form-label col-md-2" }, labelText: "New category name")
+		<div class="col-md-10">
+			@Html.EditorFor(model => model.NewCategoryName, new { @class = "form-control", @placeholder = "NewCategoryName" })
+		</div>
+		<br />
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" value="ADD" class="btn btn-success" />
+		</div>
+	</div>
+}
+
+<br />
+@foreach (var category in Model.Categories)
+{
+	using (Html.BeginForm("DeleteCategory", "Admin", new { categoryId = category.Id }, FormMethod.Post))
+	{
+		<div class="row">
+			<div class="list-group-item">
+				<h4><strong>@category.Name</strong></h4>
+				<br />
+			</div>
+			<div class="form-group row">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="DELETE" class="btn btn-danger" />
+				</div>
+			</div>
+		</div>
+	}
+}

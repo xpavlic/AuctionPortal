@@ -154,6 +154,7 @@
     <Compile Include="Models\Admin\AccountEditModel.cs" />
     <Compile Include="Models\Admin\AccountListModel.cs" />
     <Compile Include="Models\Admin\AuctionListModel.cs" />
+    <Compile Include="Models\Admin\CategoriesModel.cs" />
     <Compile Include="Models\Auctions\AuctionCreateViewModel.cs" />
     <Compile Include="Models\Auctions\AuctionDetailViewModel.cs" />
     <Compile Include="Models\Auctions\AuctionListViewModel.cs" />
@@ -192,10 +193,10 @@
     <Content Include="Views\Admin\AccountList.cshtml" />
     <Content Include="Views\Admin\AuctionList.cshtml" />
     <Content Include="Views\Admin\AccountEdit.cshtml" />
-    <Content Include="Views\Admin\AuctionEdit.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
     <Content Include="Views\Auctions\AuctionEditView.cshtml" />
+    <Content Include="Views\Admin\Categories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AuctionPortal.BusinessLayer\AuctionPortal.BusinessLayer.csproj">

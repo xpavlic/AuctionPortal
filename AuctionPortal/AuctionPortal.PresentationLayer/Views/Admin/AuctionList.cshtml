@@ -1,7 +1,7 @@
 ﻿@model AuctionPortal.PresentationLayer.Models.Admin.AuctionListModel
 
 @{
-    ViewBag.Title = "Auctions";
+	ViewBag.Title = "Auctions";
 }
 
 <h2>Auctions</h2>
@@ -12,7 +12,7 @@
 	foreach (var auction in Model.Auctions.Where(x => x.CategoryId == category.Id))
 	{
 		<div>
-			<div class="list-group-item">
+			<div class="list-group-item clickable-area" @("onclick=GoToDetail('" + auction.Id + "')")>
 				<h4><strong>@auction.Name</strong>    @auction.ActualPrice CZK    @auction.ClosingTime</h4>
 				<h5>@auction.Description</h5>
 				<br />
@@ -20,3 +20,9 @@
 		</div>
 	}
 }
+
+<script>
+	function GoToDetail(id) {
+		window.location = "/Auctions/Details/" + id;
+	}
+</script>
